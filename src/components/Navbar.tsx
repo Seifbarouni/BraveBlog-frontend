@@ -12,7 +12,7 @@ export default function Navbar () {
   const OpenRegisterModal=():void=>{
     setRegisterModal(true);
   }
-  const logo="./logo.png"
+  const logo="/images/logo.png"
     return (
         <div className="border flex items-center lg:justify-around justify-between p-2 bg-white shadow-sm">
       <a  href="/" className="flex items-center cursor-pointer">

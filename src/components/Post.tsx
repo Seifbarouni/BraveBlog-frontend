@@ -14,7 +14,7 @@ export default function Post({k}){
                 </div>
 
                 <div  className="mt-2 flex justify-between items-center text-gray-600 lg:text-base text-sm">
-                  <span className="flex items-center"><img src="./like.svg" alt="" className="h-4 w-4" /> <span className="ml-1">700 likes</span></span>
+                  <span className="flex items-center"><img src="/images/like.svg" alt="" className="h-4 w-4" /> <span className="ml-1">700 likes</span></span>
                   <span >2 min read</span>
                 </div>
              </div>

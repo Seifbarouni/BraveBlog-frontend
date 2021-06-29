@@ -15,7 +15,9 @@ export default function App() {
           <Layout/>
           </Route>
           <Route path="/post/:id">
+            <div className="flex justify-center">
             <PostById/>
+            </div>
           </Route>
         </Switch>
         </BrowserRouter>

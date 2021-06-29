@@ -1,5 +1,5 @@
 import { useState } from "react";
-//import {Link} from "react-router-dom";
+//import {Redirect} from "react-router-dom";
 import LoginPopup from "./LoginPopup";
 import RegisterPopup from "./RegisterPopup";
 
@@ -15,10 +15,10 @@ export default function Navbar () {
   const logo="/images/logo.png"
     return (
         <div className="border flex items-center lg:justify-around justify-between p-2 bg-white shadow-sm">
-      <a  href="/" className="flex items-center cursor-pointer">
+      <div  className="flex items-center cursor-pointer">
         <img src={logo} alt="" className="h-12 w-12"/>
         <span className="font-bold ml-2">Blaviken</span>
-      </a>
+      </div>
       <div className="flex items-center">
       
         {isLoginModalOpen ? <LoginPopup setLoginModal={setLoginModal}/>:""}

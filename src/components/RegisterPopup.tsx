@@ -13,7 +13,7 @@ export default function RegisterPopup({setRegisterModal}){
 
      <div>
      <span className="flex justify-center mb-5">
-<img src="./logo.png" alt="" className="h-10 w-10"/>
+<img src="/images/logo.png" alt="" className="h-10 w-10"/>
 </span>
 Lorem, ipsum dolor sit amet consectetur adipisicing elit. <br />
          <span className="font-bold md:text-lg">Register</span>

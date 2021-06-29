@@ -12,7 +12,7 @@ export default function LoginPopup({setLoginModal}){
 
      <div>
      <span className="flex justify-center mb-5">
-<img src="./logo.png" alt="" className="h-10 w-10"/>
+<img src="/images/logo.png" alt="" className="h-10 w-10"/>
 </span>
          <span className="font-bold md:text-lg">Log in</span>
          <form className="mt-3 flex flex-col" >

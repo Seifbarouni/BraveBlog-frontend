@@ -1,11 +1,17 @@
 //import {useParams} from "react-router-dom";
 
+import { useState } from "react"
+
 export default function  PostById(){
    // const {id} = useParams();
+   const [like, setLike] = useState(true)
+  const updateLike = ()=>{
+    setLike(!like)
+  }
     return (
         <div className="flex  justify-center lg:w-2/3 self-center">
             <div className="mt-6 ml-2 mr-2 p-4 md:flex hidden">
-            <span className="flex flex-col items-center"><img src="/images/like.svg" alt="" className="h-6 w-6 cursor-pointer" /> <span className="mt-2">700</span></span>
+            <span className="flex flex-col items-center"  onClick={updateLike}><img src={like?"/images/like.svg":"/images/blacklike.svg"} alt="heart" className="h-6 w-6" /> <span className="ml-1">700</span></span>
             </div>
         <div className="bg-white  rounded-md shadow-md mt-2 cursor-pointer  mr-0 sm:mr-2">
             <div className="">

@@ -1,6 +1,10 @@
-export function Post(){
+import {Link} from "react-router-dom"
+
+export default function Post({k}){
+  const link = "/post/"+k
+
     return (
-        <div className="bg-white p-2 rounded-md shadow-md mt-2 cursor-pointer  border-2 border-white  hover:border-black">
+        <Link to={link}  className="bg-white p-2 rounded-md shadow-md mt-2 cursor-pointer  border-2 border-white  hover:border-black">
           <div className="flex ">
              <div  className="bg-blue-700 rounded-full h-8 w-8 px-4 py-1"></div>
              <div>
@@ -15,6 +19,6 @@ export function Post(){
                 </div>
              </div>
           </div>
-        </div>
+        </Link>
     )
 }

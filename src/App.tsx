@@ -1,20 +1,24 @@
-import LoginPopup from "./components/LoginPopup";
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Layout from './components/Layout';
+import PostById from './components/Posts/PostById';
 import Navbar from "./components/Navbar";
-import { Post } from "./components/Post";
 
-function App() {
+
+
+export default function App() {
   return (
     <div>
       <Navbar/>
-      <div className="flex flex-col  items-center mb-2">
-      <Post/>
-      <Post/>
-      <Post/>
-      <Post/>
-      <LoginPopup/>
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+          <Layout/>
+          </Route>
+          <Route path="/post/:id">
+            <PostById/>
+          </Route>
+        </Switch>
+        </BrowserRouter>
     </div>
   );
 }
-
-export default App;

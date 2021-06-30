@@ -1,7 +1,7 @@
 import { useState } from "react";
-//import {Redirect} from "react-router-dom";
-import LoginPopup from "./LoginPopup";
-import RegisterPopup from "./RegisterPopup";
+import {Link} from "react-router-dom";
+import LoginPopup from "./Popups/LoginPopup";
+import RegisterPopup from "./Popups/RegisterPopup";
 
 export default function Navbar () {
   const [isLoginModalOpen, setLoginModal] = useState(false);
@@ -15,10 +15,10 @@ export default function Navbar () {
   const logo="/images/logo.png"
     return (
         <div className="border flex items-center lg:justify-around justify-between p-2 bg-white shadow-sm">
-      <div  className="flex items-center cursor-pointer">
+      <Link to="/"  className="flex items-center cursor-pointer">
         <img src={logo} alt="" className="h-12 w-12"/>
         <span className="font-bold ml-2">Blaviken</span>
-      </div>
+      </Link>
       <div className="flex items-center">
       
         {isLoginModalOpen ? <LoginPopup setLoginModal={setLoginModal}/>:""}

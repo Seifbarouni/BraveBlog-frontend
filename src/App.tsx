@@ -1,23 +1,35 @@
 import { BrowserRouter, Route, Switch ,Link} from 'react-router-dom';
 import Layout from './components/Layout';
 import PostById from './components/Posts/PostById';
+import LoginPopup from './components/Popups/LoginPopup';
 import Navbar from "./components/Navbar";
-
+import useAuth from './components/useAuth';
 
 
 export default function App() {
+ 
+  const {authData, saveData} = useAuth();
   return (
     <div>
       <BrowserRouter>
-      <Navbar/>
+      <Navbar setAuthData={saveData} authData={authData}/>
         <Switch>
           <Route exact path="/">
           <Layout/>
           </Route>
           <Route path="/post/:id">
-            <div className="flex justify-center">
-            <PostById/>
-            </div>
+           {authData && authData.message==="Success" ?
+           <div className="flex justify-center">
+             <PostById/>
+           </div>
+           :
+           <div className="text-center mt-12 text-xl font-bold">
+           You need to be logged in to access page content! <br />
+         <Link to="/" className="text-center text-gray-700 text-lg hover:underline">
+           Go home
+         </Link>
+         </div>
+           }
           </Route>
           <Route>
             <div className="text-center mt-12 text-xl font-bold">

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import {Link} from "react-router-dom"
 
-export default function Post({username,title,likes,createdAt}){
+export default function Post({username,title,likes,createdAt,postId}){
   const [userUrl, setUserUrl] = useState("");
- 
+  const link = "/post/"+postId;
   useEffect(()=>{
     const getImage = async (username:string)=> {
       const resp = await fetch(`http://localhost:9000/getUser/${username}`);
@@ -11,9 +11,12 @@ export default function Post({username,title,likes,createdAt}){
       setUserUrl(data);
   }
   getImage(username);
-  },[])
+  },[username])
     return (
-          <Link to="/post/x" className="flex bg-white p-2 rounded-md shadow-md mt-2 cursor-pointer  border-2 border-white  hover:border-black lg:w-1/2 w-3/4">
+          <Link to={{
+            pathname:link,
+            state:{userUrl:userUrl},
+          }} className="flex bg-white p-2 rounded-md shadow-md mt-2 cursor-pointer  border-2 border-white  hover:border-black lg:w-1/2 w-3/4">
              <div  className="mt-1">
                <img src={userUrl} alt="img"  className="h-8 w-8 rounded-full"/>
              </div>

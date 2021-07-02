@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Switch ,Link} from 'react-router-dom';
 import Layout from './components/Layout';
 import PostById from './components/Posts/PostById';
-import LoginPopup from './components/Popups/LoginPopup';
 import Navbar from "./components/Navbar";
 import useAuth from './components/useAuth';
 
@@ -20,7 +19,7 @@ export default function App() {
           <Route path="/post/:id">
            {authData && authData.message==="Success" ?
            <div className="flex justify-center">
-             <PostById/>
+             <PostById jwt={authData.jwt}/>
            </div>
            :
            <div className="text-center mt-12 text-xl font-bold">

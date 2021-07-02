@@ -17,7 +17,7 @@ export default function Layout(){
     return (
         <div className="flex flex-col  items-center mb-2">
             {posts.map((post)=>{
-                return (<Post key={post.id} username={post.user} title={post.title} likes={post.likes} createdAt={post.createdAt}/>)
+                return (<Post key={post.id} username={post.user} title={post.title} likes={post.likes} createdAt={post.createdAt} postId={post.id}/>)
             })}
             
         </div>

@@ -19,7 +19,7 @@ export default function App() {
           <Route path="/post/:id">
            {authData && authData.message==="Success" ?
            <div className="flex justify-center">
-             <PostById jwt={authData.jwt}/>
+             <PostById jwt={authData.jwt} userId={authData.userId}/>
            </div>
            :
            <div className="text-center mt-12 text-xl font-bold">

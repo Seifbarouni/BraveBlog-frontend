@@ -1,13 +1,14 @@
 import {useParams,useLocation} from "react-router-dom";
 import { useEffect, useState } from "react"
 
-export default function  PostById({jwt}){
+export default function  PostById({jwt,userId}){
   const GetUserUrlFromLocationState=()=>{
     const location = useLocation();
     return location.state?.userUrl;
   }
   const {id} = useParams();
   const [like, setLike] = useState(false);
+  const [likesNumber,setLikesNumber]=useState(0);
   const userUrl = GetUserUrlFromLocationState()
   const updateLike = ()=>{
     setLike(!like)
@@ -22,25 +23,65 @@ export default function  PostById({jwt}){
     likes:0
   });
     useEffect(() => {
-        const fetchData = async()=>{
+        const fetchPostData = async()=>{
             const resp = await fetch(`http://localhost:9000/api/v1/posts/${id}`,{
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${jwt}`,
               },
             });
-            setPost(await resp.json());
+            const temppost = await resp.json()
+            setPost(temppost);
+            setLikesNumber(temppost.likes);
         }
 
-        fetchData();
+        const checkIfPostLikes = async ()=>{
+          const resp = await fetch(`http://localhost:9000/l/didlike/${id}/${userId}`,{
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${jwt}`,
+              },
+            });
+            //setLike(Boolean(await resp.text()));
+            console.log(await resp.text());
+        }
+
+
+        fetchPostData();
+        checkIfPostLikes();
+
         return () => {
            // 
         }
     }, [id,jwt])
+    const dislikePost=async()=>{
+      setLikesNumber(likesNumber-1);
+      setLike(!like);
+      const resp = await fetch(`http://localhost:9000/l/dislike/${id}/${userId}`,{
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${jwt}`,
+              },
+            });
+      const message = await resp.text();
+      if(message!=="Success")alert(message);
+    }
+    const likePost=async ()=>{
+      setLikesNumber(likesNumber+1);
+      setLike(!like);
+      const resp = await fetch(`http://localhost:9000/l/like/${id}/${userId}`,{
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${jwt}`,
+              },
+            });
+      const message = await resp.text();
+      if(message!=="Success")alert(message);
+    }
     return (
         <div className="flex  justify-center lg:w-1/2 self-center">
             <div className="mt-6 p-4 md:flex hidden">
-            <span className="flex flex-col items-center font-bold"  onClick={updateLike}><img src={like?"/images/like.svg":"/images/blacklike.svg"} alt="heart" className="h-16 w-16 cursor-pointer" /> <span >{post.likes}</span></span>
+            <span className="flex flex-col items-center font-bold"  onClick={updateLike}><img src={like?"/images/like.svg":"/images/blacklike.svg"} alt="heart" onClick={like?dislikePost:likePost}  className="h-16 w-16 cursor-pointer" /> <span >{likesNumber}</span></span>
             </div>
         <div className="bg-white  rounded-md shadow-md mt-2 cursor-pointer  mr-0 sm:mr-2 sm:ml-2">
             <div>
@@ -51,7 +92,7 @@ export default function  PostById({jwt}){
               {post.title}
             </div>
             <div className="flex md:hidden mt-3">
-            <span className="flex items-center font-bold"  onClick={updateLike}><img src={like?"/images/like.svg":"/images/blacklike.svg"} alt="heart" className="h-6 w-6 cursor-pointer" /> <span className="ml-1">{post.likes}</span></span>
+            <span className="flex items-center font-bold"  onClick={updateLike}><img src={like?"/images/like.svg":"/images/blacklike.svg"} alt="heart" onClick={like?dislikePost:likePost} className="h-6 w-6 cursor-pointer" /> <span className="ml-1">{likesNumber}</span></span>
             </div>
             <div className="flex items-center justify-between mt-4">
             <span className="flex items-center" >

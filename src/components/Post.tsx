@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react"
 import {Link} from "react-router-dom"
 
-export default function Post({username,title,likes,createdAt,postId}){
-  const [userUrl, setUserUrl] = useState("");
+interface Props{
+  username:string,
+  title:string,
+  likes:number,
+  createdAt:string,
+  postId:number
+}
+
+const Post:React.FC<Props>=({username,title,likes,createdAt,postId})=>{
+  const [userUrl, setUserUrl] = useState<string>("");
   const link = "/post/"+postId;
   useEffect(()=>{
     const getImage = async (username:string)=> {
@@ -34,3 +42,5 @@ export default function Post({username,title,likes,createdAt,postId}){
           </Link>
     )
 }
+
+export default Post;

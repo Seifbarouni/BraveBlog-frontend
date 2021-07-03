@@ -1,19 +1,34 @@
 import {useParams,useLocation} from "react-router-dom";
 import { useEffect, useState } from "react"
 
-export default function  PostById({jwt,userId}){
+interface Props{
+  jwt:string,
+  userId:number
+}
+
+interface PostWithBg{
+  id:number,
+    title:string,
+    content:string,
+    user:string,
+    bgUrl:string,
+    createdAt:string,
+    likes:number
+}
+
+const PostById:React.FC<Props>=({jwt,userId})=>{
   const GetUserUrlFromLocationState=()=>{
     const location = useLocation();
     return location.state?.userUrl;
   }
   const {id} = useParams();
-  const [like, setLike] = useState("not liked");
-  const [likesNumber,setLikesNumber]=useState(0);
+  const [like, setLike] = useState<string>("not liked");
+  const [likesNumber,setLikesNumber]=useState<number>(0);
   const userUrl = GetUserUrlFromLocationState()
   const updateLike = ()=>{
     like==="liked" ? setLike("not liked"):setLike("liked")
   }
-  const [post, setPost] = useState({
+  const [post, setPost] = useState<PostWithBg>({
     id:0,
     title:"",
     content:"",
@@ -109,3 +124,5 @@ export default function  PostById({jwt,userId}){
         </div>
     )
 }
+
+export default PostById;

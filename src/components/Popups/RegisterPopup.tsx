@@ -1,15 +1,20 @@
 import { useState } from "react";
 
-export default function RegisterPopup({setRegisterModal,setAuthData}){
+interface Props{
+    setRegisterModal: React.Dispatch<React.SetStateAction<boolean>>,
+    setAuthData:any
+}
+
+const RegisterPopup:React.FC<Props>=({setRegisterModal,setAuthData})=>{
     const closeModal = ()=>{
         setRegisterModal(false)
     }
-    const[rUsername,setRUsername]=useState("");
-  const[rPassword,setRPassword]=useState("");
-  const[rEmail,setREmail]=useState("");
-  const[rImgUrl,setRImgUrl]=useState("");
+    const[rUsername,setRUsername]=useState<string>("");
+  const[rPassword,setRPassword]=useState<string>("");
+  const[rEmail,setREmail]=useState<string>("");
+  const[rImgUrl,setRImgUrl]=useState<string>("");
 
-  const register = async (username,password,imgUrl,email)=>{
+  const register = async (username:string,password:string,imgUrl:string,email:string)=>{
     const resp = await fetch("http://localhost:9000/register",{
         method: "POST",
         headers: {
@@ -27,7 +32,7 @@ export default function RegisterPopup({setRegisterModal,setAuthData}){
     setAuthData(data);
     setRegisterModal(false);
 }
-const handleSubmit = (e)=>{
+const handleSubmit = (e:any)=>{
     e.preventDefault();
     register(rUsername,rPassword,rImgUrl,rEmail);
 }
@@ -65,3 +70,5 @@ Lorem, ipsum dolor sit amet consectetur adipisicing elit. <br />
    </div>
     )
 }
+
+export default RegisterPopup;

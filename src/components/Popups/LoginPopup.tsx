@@ -1,13 +1,18 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 
-export default function LoginPopup({setLoginModal,setAuthData}){
-    const[lUsername,setLUsername]=useState("");
-    const[lPassword,setLPassword]=useState("");
+interface Props{
+    setLoginModal: React.Dispatch<React.SetStateAction<boolean>>,
+    setAuthData:any
+}
+
+const LoginPopup:React.FC<Props>=({setLoginModal,setAuthData})=>{
+    const[lUsername,setLUsername]=useState<string>("");
+    const[lPassword,setLPassword]=useState<string>("");
     const closeModal = ()=>{
         setLoginModal(false)
     }
-    const login = async (username,password)=>{
+    const login = async (username:string,password:string)=>{
         const resp = await fetch("http://localhost:9000/auth",{
             method: "POST",
             headers: {
@@ -54,3 +59,5 @@ export default function LoginPopup({setLoginModal,setAuthData}){
    </div>
     )
 }
+
+export default LoginPopup;

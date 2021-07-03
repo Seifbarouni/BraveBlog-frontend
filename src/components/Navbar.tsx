@@ -3,9 +3,11 @@ import {Link} from "react-router-dom";
 import LoginPopup from "./Popups/LoginPopup";
 import RegisterPopup from "./Popups/RegisterPopup";
 
-export default function Navbar ({authData,setAuthData}) {
-  const [isLoginModalOpen, setLoginModal] = useState(false);
-  const [isRegisterModalOpen, setRegisterModal] = useState(false);
+
+
+const Navbar:React.FC<any>= ({authData,setAuthData})=> {
+  const [isLoginModalOpen, setLoginModal] = useState<boolean>(false);
+  const [isRegisterModalOpen, setRegisterModal] = useState<boolean>(false);
   
   
   const OpenLoginModal=()=>{
@@ -45,3 +47,5 @@ export default function Navbar ({authData,setAuthData}) {
     </div>
     )
 };
+
+export default Navbar;

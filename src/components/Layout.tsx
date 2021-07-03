@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
 import Post from "./Post";
 
-export default function Layout(){
-    const [posts, setPosts] = useState([]);
+interface PostWithoutBg{
+      id:number,
+      title:string,
+      user:string,
+      createdAt:string,
+      likes:number
+  }
+
+const Layout:React.FC=()=>{
+    const [posts, setPosts] = useState<PostWithoutBg[]>([]);
     useEffect(() => {
         const fetchData = async()=>{
             const resp = await fetch("http://localhost:9000/api/v1/posts");
@@ -23,3 +31,5 @@ export default function Layout(){
         </div>
     )
 }
+
+export default Layout;

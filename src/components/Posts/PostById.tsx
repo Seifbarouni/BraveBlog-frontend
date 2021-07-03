@@ -7,11 +7,11 @@ export default function  PostById({jwt,userId}){
     return location.state?.userUrl;
   }
   const {id} = useParams();
-  const [like, setLike] = useState(false);
+  const [like, setLike] = useState("not liked");
   const [likesNumber,setLikesNumber]=useState(0);
   const userUrl = GetUserUrlFromLocationState()
   const updateLike = ()=>{
-    setLike(!like)
+    like==="liked" ? setLike("not liked"):setLike("liked")
   }
   const [post, setPost] = useState({
     id:0,
@@ -35,28 +35,25 @@ export default function  PostById({jwt,userId}){
             setLikesNumber(temppost.likes);
         }
 
-        const checkIfPostLikes = async ()=>{
-          const resp = await fetch(`http://localhost:9000/l/didlike/${id}/${userId}`,{
+        const checkIfPostLiked = async ()=>{
+          const resp = await fetch(`http://localhost:9000/l/didLike/${id}/${userId}`,{
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${jwt}`,
               },
             });
-            //setLike(Boolean(await resp.text()));
-            console.log(await resp.text());
+            setLike(await resp.text());
         }
-
 
         fetchPostData();
-        checkIfPostLikes();
+        checkIfPostLiked();
 
         return () => {
-           // 
         }
-    }, [id,jwt])
+    }, [id,jwt,userId])
     const dislikePost=async()=>{
       setLikesNumber(likesNumber-1);
-      setLike(!like);
+      setLike("not liked");
       const resp = await fetch(`http://localhost:9000/l/dislike/${id}/${userId}`,{
               headers: {
                 "Content-Type": "application/json",
@@ -68,7 +65,7 @@ export default function  PostById({jwt,userId}){
     }
     const likePost=async ()=>{
       setLikesNumber(likesNumber+1);
-      setLike(!like);
+      setLike("liked");
       const resp = await fetch(`http://localhost:9000/l/like/${id}/${userId}`,{
               headers: {
                 "Content-Type": "application/json",
@@ -81,7 +78,7 @@ export default function  PostById({jwt,userId}){
     return (
         <div className="flex  justify-center lg:w-1/2 self-center">
             <div className="mt-6 p-4 md:flex hidden">
-            <span className="flex flex-col items-center font-bold"  onClick={updateLike}><img src={like?"/images/like.svg":"/images/blacklike.svg"} alt="heart" onClick={like?dislikePost:likePost}  className="h-16 w-16 cursor-pointer" /> <span >{likesNumber}</span></span>
+            <span className="flex flex-col items-center font-bold"  onClick={updateLike}><img src={like==="liked"?"/images/like.svg":"/images/blacklike.svg"} alt="heart" onClick={like==="liked"?dislikePost:likePost}  className="h-16 w-16 cursor-pointer" /> <span >{likesNumber}</span></span>
             </div>
         <div className="bg-white  rounded-md shadow-md mt-2 cursor-pointer  mr-0 sm:mr-2 sm:ml-2">
             <div>
@@ -92,7 +89,7 @@ export default function  PostById({jwt,userId}){
               {post.title}
             </div>
             <div className="flex md:hidden mt-3">
-            <span className="flex items-center font-bold"  onClick={updateLike}><img src={like?"/images/like.svg":"/images/blacklike.svg"} alt="heart" onClick={like?dislikePost:likePost} className="h-6 w-6 cursor-pointer" /> <span className="ml-1">{likesNumber}</span></span>
+            <span className="flex items-center font-bold"  onClick={updateLike}><img src={like==="liked"?"/images/like.svg":"/images/blacklike.svg"} alt="heart" onClick={like==="liked"?dislikePost:likePost} className="h-6 w-6 cursor-pointer" /> <span className="ml-1">{likesNumber}</span></span>
             </div>
             <div className="flex items-center justify-between mt-4">
             <span className="flex items-center" >

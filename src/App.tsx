@@ -1,8 +1,9 @@
-import { BrowserRouter, Route, Switch ,Link} from 'react-router-dom';
+import { BrowserRouter, Route, Switch ,Link,Redirect} from 'react-router-dom';
 import Layout from './components/Layout';
 import PostById from './components/Posts/PostById';
 import Navbar from "./components/Navbar";
 import useAuth from './components/useAuth';
+import AllPostsByUserId from './components/Posts/AllPostsByUserId';
 
 
 export default function App() {
@@ -29,6 +30,10 @@ export default function App() {
          </Link>
          </div>
            }
+          </Route>
+          <Route path="/myPosts">
+          {authData && authData.message==="Success" ?
+           <AllPostsByUserId user={authData.username} jwt={authData.jwt}/>:<Redirect to="/"/>}
           </Route>
           <Route>
             <div className="text-center mt-12 text-xl font-bold">

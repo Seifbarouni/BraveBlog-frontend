@@ -37,7 +37,7 @@ const Navbar:React.FC<any>= ({authData,setAuthData})=> {
     </div>}
     {authData&&authData.message==="Success" &&
     <div className="flex items-center sm:text-base text-sm font-bold">
-      <div className="cursor-pointer mr-2 hover:text-gray-700">My posts</div>
+      <Link to="/myPosts"  className="cursor-pointer mr-2 hover:text-gray-700">My posts</Link>
       <div className="cursor-pointer mr-2 hover:text-gray-700">New post</div>
       <div className="cursor-pointer mr-2 hover:text-gray-700" onClick={logout}>Logout</div>
       <img src={authData.picUrl} alt="profile pic" className="h-10 w-10 rounded-full" title={authData.username}/>

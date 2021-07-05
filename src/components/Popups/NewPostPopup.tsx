@@ -1,9 +1,10 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import {authenticationData} from "../useAuth";
 import moment from 'moment';
 
 interface Props{
     setAddPostModal: React.Dispatch<React.SetStateAction<boolean>>,
-    authData:any
+    authData:authenticationData
 }
 
 const NewPostPopup:React.FC<Props> = ({setAddPostModal,authData}) => {
@@ -34,7 +35,7 @@ const NewPostPopup:React.FC<Props> = ({setAddPostModal,authData}) => {
         setAddPostModal(false);
         window.location.reload();
     }
-    const handleSubmit=(e)=>{
+    const handleSubmit=(e:React.FormEvent)=>{
         e.preventDefault();
         post(title,imageUrl,content);
     }

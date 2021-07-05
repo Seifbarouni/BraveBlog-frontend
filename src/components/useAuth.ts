@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-interface authenticationData{
+export interface authenticationData{
   message :string,
   jwt :string,
   username :string,

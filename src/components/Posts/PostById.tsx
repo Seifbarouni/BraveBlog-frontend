@@ -6,6 +6,10 @@ interface Props{
   userId:number
 }
 
+interface Params{
+  id:string
+}
+
 interface PostWithBg{
   id:number,
     title:string,
@@ -18,10 +22,10 @@ interface PostWithBg{
 
 const PostById:React.FC<Props>=({jwt,userId})=>{
   const GetUserUrlFromLocationState=()=>{
-    const location = useLocation();
+    const location = useLocation<any>();
     return location.state?.userUrl;
   }
-  const {id} = useParams();
+  const {id} = useParams<Params>();
   const [like, setLike] = useState<string>("not liked");
   const [likesNumber,setLikesNumber]=useState<number>(0);
   const userUrl = GetUserUrlFromLocationState()

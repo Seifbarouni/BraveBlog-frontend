@@ -46,7 +46,10 @@ const Navbar:React.FC<any>= ({authData,setAuthData})=> {
       <div className="cursor-pointer mr-2 hover:text-gray-700" onClick={OpenAddPostModal}>New post</div>
       {isAddPostModalOpen ? <NewPostPopup setAddPostModal={setAddPostModal} authData={authData}/> :""}
       <div className="cursor-pointer mr-2 hover:text-gray-700" onClick={logout}>Logout</div>
-      <img src={authData.picUrl} alt="profile pic" className="h-10 w-10 rounded-full" title={authData.username}/>
+      <Link to="/profile" className="relative">
+      <img src={authData.picUrl} alt="profile pic" className="h-10 w-10 rounded-full ring-2 ring-gray-700" title={authData.username}/>
+      <div className="h-2 w-2 rounded-full bg-green-500 absolute right-0 bottom-0"></div>
+      </Link>
     </div>
     }
       

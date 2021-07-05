@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 interface Props{
     setRegisterModal: React.Dispatch<React.SetStateAction<boolean>>,
@@ -32,7 +32,7 @@ const RegisterPopup:React.FC<Props>=({setRegisterModal,setAuthData})=>{
     setAuthData(data);
     setRegisterModal(false);
 }
-const handleSubmit = (e:any)=>{
+const handleSubmit = (e:React.FormEvent)=>{
     e.preventDefault();
     register(rUsername,rPassword,rImgUrl,rEmail);
 }

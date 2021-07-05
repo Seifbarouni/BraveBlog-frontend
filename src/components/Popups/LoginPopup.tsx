@@ -28,7 +28,7 @@ const LoginPopup:React.FC<Props>=({setLoginModal,setAuthData})=>{
         setAuthData(data);
         setLoginModal(false);
     }
-    const handleSubmit = (e)=>{
+    const handleSubmit = (e:React.FormEvent)=>{
         e.preventDefault();
         login(lUsername,lPassword);
     }

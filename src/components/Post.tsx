@@ -35,7 +35,7 @@ const Post:React.FC<Props>=({username,title,likes,createdAt,postId})=>{
                 </div>
 
                 <div  className="mt-2 flex justify-between items-center text-gray-600 lg:text-base text-sm w-full">
-                  <span className="flex items-center"><img src="/images/like.svg" alt="" className="h-4 w-4" /> <span className="ml-1">{likes} likes</span></span>
+                  <span className="flex items-center"><img src="/images/like.svg" alt="" className="h-4 w-4" /> <span className="ml-1">{likes} like{likes!==1?"s":""}</span></span>
                   <span >2 min read</span>
                 </div>
              </div>

@@ -1,5 +1,5 @@
 import {useParams,useLocation} from "react-router-dom";
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
 interface Props{
   jwt:string,
@@ -91,11 +91,13 @@ const PostById:React.FC<Props>=({jwt,userId})=>{
       if(message!=="Success")alert(message);
     }
     return (
-        <div className="flex  justify-center lg:w-1/2 self-center">
-            <div className="mt-6 p-4 md:flex hidden">
-            <span className="flex flex-col items-center font-bold"  onClick={updateLike}><img src={like==="liked"?"/images/like.svg":"/images/blacklike.svg"} alt="heart" onClick={like==="liked"?dislikePost:likePost}  className="h-16 w-16 cursor-pointer" /> <span >{likesNumber}</span></span>
+        <div className="flex  justify-center lg:w-1/2 self-center mb-2">
+            <div className="mt-8  md:flex hidden w-1/12 justify-center">
+            <div className="flex flex-col items-center"  onClick={updateLike}><img src={like==="liked"?"/images/like.svg":"/images/blacklike.svg"} alt="heart" onClick={like==="liked"?dislikePost:likePost} 
+            className="cursor-pointer h-6 w-6" /> <span className="font-bold mt-2">{likesNumber}</span></div>
             </div>
-        <div className="bg-white  rounded-md shadow-md mt-2 cursor-pointer  mr-0 sm:mr-2 sm:ml-2">
+             
+        <div className="bg-white  rounded-md shadow-md mt-2 cursor-pointer  mr-0 sm:mr-2 sm:ml-2 w-11/12">
             <div>
                 <img src={post.bgUrl} alt="" className="object-scale-down  w-full rounded-t-md"/>
             </div>

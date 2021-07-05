@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {Link} from "react-router-dom";
 import LoginPopup from "./Popups/LoginPopup";
+import NewPostPopup from "./Popups/NewPostPopup";
 import RegisterPopup from "./Popups/RegisterPopup";
 
 
@@ -8,6 +9,7 @@ import RegisterPopup from "./Popups/RegisterPopup";
 const Navbar:React.FC<any>= ({authData,setAuthData})=> {
   const [isLoginModalOpen, setLoginModal] = useState<boolean>(false);
   const [isRegisterModalOpen, setRegisterModal] = useState<boolean>(false);
+  const [isAddPostModalOpen, setAddPostModal] = useState<boolean>(false);
   
   
   const OpenLoginModal=()=>{
@@ -15,6 +17,9 @@ const Navbar:React.FC<any>= ({authData,setAuthData})=> {
   }
   const OpenRegisterModal=()=>{
     setRegisterModal(true);
+  }
+  const OpenAddPostModal=()=>{
+    setAddPostModal(true);
   }
   const logout=()=>{
     setAuthData({message:"not authenticated"})
@@ -38,7 +43,8 @@ const Navbar:React.FC<any>= ({authData,setAuthData})=> {
     {authData&&authData.message==="Success" &&
     <div className="flex items-center sm:text-base text-sm font-bold">
       <Link to="/myPosts"  className="cursor-pointer mr-2 hover:text-gray-700">My posts</Link>
-      <div className="cursor-pointer mr-2 hover:text-gray-700">New post</div>
+      <div className="cursor-pointer mr-2 hover:text-gray-700" onClick={OpenAddPostModal}>New post</div>
+      {isAddPostModalOpen ? <NewPostPopup setAddPostModal={setAddPostModal} authData={authData}/> :""}
       <div className="cursor-pointer mr-2 hover:text-gray-700" onClick={logout}>Logout</div>
       <img src={authData.picUrl} alt="profile pic" className="h-10 w-10 rounded-full" title={authData.username}/>
     </div>

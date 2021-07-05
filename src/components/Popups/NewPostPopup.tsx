@@ -33,7 +33,7 @@ const NewPostPopup:React.FC<Props> = ({setAddPostModal,authData}) => {
         const data = await resp.text();
         if(data!=="Success"){alert(data)}
         setAddPostModal(false);
-        window.location.reload();
+        window.location.href="/myPosts";
     }
     const handleSubmit=(e:React.FormEvent)=>{
         e.preventDefault();

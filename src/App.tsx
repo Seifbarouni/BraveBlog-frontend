@@ -38,7 +38,7 @@ export default function App() {
           </Route>
           <Route path="/profile">
           {authData && authData.message==="Success" ?
-           <UserProfile authData={authData}/>:
+           <UserProfile authData={authData} setAuthData={saveData}/>:
            <div className="text-center mt-12 text-xl font-bold">
            You need to be logged in! <br />
          <Link to="/" className="text-center text-gray-700 text-lg hover:underline">

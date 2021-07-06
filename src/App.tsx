@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Switch ,Link,Redirect} from 'react-router-dom';
-import Layout from './components/Layout';
+import MainPage from './components/MainPage';
 import PostById from './components/Posts/PostById';
 import Navbar from "./components/Navbar";
 import useAuth from './components/useAuth';
@@ -16,7 +16,7 @@ export default function App() {
       <Navbar setAuthData={saveData} authData={authData}/>
         <Switch>
           <Route exact path="/">
-          <Layout/>
+          <MainPage/>
           </Route>
           <Route path="/post/:id">
            {authData && authData.message==="Success" ?

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import Post from "../Post";
+import Loading from "../Spinners/Loading";
+import Post from "./Post";
 
 interface Props{
     user:string,
@@ -16,6 +17,7 @@ interface PostWithoutBg{
 
 const AllPostsByUserId:React.FC<Props> = ({user,jwt}) => {
     const [userPosts, setUserPosts] = useState<PostWithoutBg[]>([]);
+    const [loading,setLoading] = useState<boolean>(true);
     useEffect(() => {
         const fetchData = async()=>{
             const resp = await fetch(`http://localhost:9000/api/v1/posts/us/${user}`,{
@@ -28,9 +30,12 @@ const AllPostsByUserId:React.FC<Props> = ({user,jwt}) => {
         }
 
         fetchData();
+        setLoading(false);
         return () => {}
     }, [user,jwt])
     return (
+        <div>
+            {!loading ?
         <div>
             {userPosts.length!==0?
                <div className="flex flex-col  items-center mb-2">
@@ -41,7 +46,12 @@ const AllPostsByUserId:React.FC<Props> = ({user,jwt}) => {
                 <div className="text-center mt-12 text-xl font-bold">
                 You have no posts!
               </div>
-}
+                }
+        </div>    
+        :
+        <Loading/>
+        }
+            
         </div>
     )
 }

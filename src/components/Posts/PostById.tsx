@@ -1,5 +1,6 @@
 import {useParams,useLocation} from "react-router-dom";
 import { useEffect, useState } from "react";
+import Loading from "../Spinners/Loading";
 
 interface Props{
   jwt:string,
@@ -28,6 +29,7 @@ const PostById:React.FC<Props>=({jwt,userId})=>{
   const {id} = useParams<Params>();
   const [like, setLike] = useState<string>("not liked");
   const [likesNumber,setLikesNumber]=useState<number>(0);
+  const [loading,setLoading]=useState<boolean>(true);
   const userUrl = GetUserUrlFromLocationState()
   const updateLike = ()=>{
     like==="liked" ? setLike("not liked"):setLike("liked")
@@ -66,7 +68,7 @@ const PostById:React.FC<Props>=({jwt,userId})=>{
 
         fetchPostData();
         checkIfPostLiked();
-
+        setLoading(false);
         return () => {
         }
     }, [id,jwt,userId])
@@ -95,6 +97,9 @@ const PostById:React.FC<Props>=({jwt,userId})=>{
       if(message!=="Success")alert(message);
     }
     return (
+      <div className="flex  justify-center">
+        {!loading ?
+        
         <div className="flex  justify-center lg:w-1/2 self-center mb-2">
             <div className="mt-8  md:flex hidden w-1/12 justify-center">
             <div className="flex flex-col items-center"  onClick={updateLike}><img src={like==="liked"?"/images/like.svg":"/images/blacklike.svg"} alt="heart" onClick={like==="liked"?dislikePost:likePost} 
@@ -128,6 +133,10 @@ const PostById:React.FC<Props>=({jwt,userId})=>{
              </div>
         </div>
         </div>
+      :
+      <Loading/>
+      }
+      </div>
     )
 }
 

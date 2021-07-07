@@ -1,5 +1,6 @@
 import {useParams,useLocation} from "react-router-dom";
 import { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
 import Loading from "../Spinners/Loading";
 
 interface Props{
@@ -97,21 +98,21 @@ const PostById:React.FC<Props>=({jwt,userId})=>{
       if(message!=="Success")alert(message);
     }
     return (
-      <div className="flex  justify-center">
+      <div className="flex  justify-center lg:w-1/2">
         {!loading ?
         
-        <div className="flex  justify-center lg:w-1/2 self-center mb-2">
+        <div className="flex  justify-center  self-center mb-2">
             <div className="mt-8  md:flex hidden w-1/12 justify-center">
             <div className="flex flex-col items-center"  onClick={updateLike}><img src={like==="liked"?"/images/like.svg":"/images/blacklike.svg"} alt="heart" onClick={like==="liked"?dislikePost:likePost} 
             className="cursor-pointer h-6 w-6" /> <span className="font-bold mt-2">{likesNumber}</span></div>
             </div>
              
-        <div className="bg-white  rounded-md shadow-md mt-2 cursor-pointer  mr-0 sm:mr-2 sm:ml-2 w-11/12">
+        <div className="bg-white  rounded-md shadow-md mt-2  mr-0 sm:mr-2 sm:ml-2 w-11/12">
             <div>
-                <img src={post.bgUrl} alt="" className="object-scale-down  w-full rounded-t-md"/>
+                <img src={post.bgUrl} alt="" className="object-fit  w-full rounded-t-md"/>
             </div>
           <div className="flex flex-col p-2">
-              <div className="font-bold mt-2 lg:text-2xl text-lg hover:text-blue-600">
+              <div className="font-bold mt-2 lg:text-2xl text-xl hover:text-blue-600 cursor-pointer">
               {post.title}
             </div>
             <div className="flex md:hidden mt-3">
@@ -129,7 +130,10 @@ const PostById:React.FC<Props>=({jwt,userId})=>{
             
           </div>
            <div className="lg:text-xl text-lg p-2">
-                 {post.content}
+             <ReactMarkdown className="prose prose-blue md:prose-lg">
+             {post.content}
+             </ReactMarkdown>
+                 
              </div>
         </div>
         </div>

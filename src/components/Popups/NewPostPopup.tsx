@@ -57,6 +57,7 @@ const NewPostPopup:React.FC<Props> = ({setAddPostModal,authData}) => {
              <input type="text" placeholder="Title"  onChange={e=>setTitle(e.target.value)}className="placeholder-gray-700 ring-1 ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm" required autoFocus/>
              <input type="url" placeholder="Image URL"  onChange={e=>setImageUrl(e.target.value)}
               className="mt-2 placeholder-gray-700 ring-1 ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm" required/>
+              <div className="mt-2 px-1 py-1 bg-green-500 text-center rounded-sm font-normal">Supports Markdown! <a rel="noreferrer" target="_blank" href="https://www.markdownguide.org/getting-started"  className="underline font-bold">Read more</a></div>
               <textarea className="mt-2 placeholder-gray-700 ring-1  ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm"  onChange={e=>setContent(e.target.value)}placeholder="Post content" cols={30} rows={10} required></textarea>
             <div className="flex justify-end mt-3 items-center">
                 <div className="hover:underline cursor-pointer" onClick={closeModal}>Cancel</div>

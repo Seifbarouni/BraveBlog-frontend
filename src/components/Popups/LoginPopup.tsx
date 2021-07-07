@@ -37,9 +37,9 @@ export const LoginPopup:React.FC<Props>=({setLoginModal,setAuthData,loginRef})=>
         login(lUsername,lPassword);
     }
     return (
-        <div   className="min-h-screen  animated fadeIn faster  fixed  left-0 top-0  flex justify-center items-center inset-0 z-50 outline-none focus:outline-none">
+        <div   className="min-h-screen  fixed  left-0 top-0  flex justify-center items-center inset-0 z-50 outline-none focus:outline-none">
         <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
-     <a.div style={props} className="w-full  max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white " ref={loginRef}>
+     <a.div style={props} className="w-full  max-w-lg p-5 relative mx-auto my-auto rounded-md shadow-lg  bg-white " ref={loginRef}>
          <span className="absolute right-0 top-0 p-2 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none"  onClick={closeModal} viewBox="0 0 24 24" stroke="currentColor">
   <path   d="M6 18L18 6M6 6l12 12" />
 </svg></span>

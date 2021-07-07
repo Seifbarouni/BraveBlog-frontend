@@ -47,7 +47,7 @@ export const NewPostPopup:React.FC<Props> = ({setAddPostModal,authData,newPostRe
         <div className="min-h-screen  fixed  left-0 top-0  flex justify-center items-center inset-0 z-50 outline-none focus:outline-none">
                 <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
 
-                <a.div style={props} className={content==="" ? "lg:w-1/2 sm:2/3 w-full p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white overflow-y-auto mt-1 mb-1":"lg:w-1/2 sm:2/3 w-full p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white h-full overflow-y-auto mt-1 mb-1"} ref={newPostRef}>
+                <a.div style={props} className={content==="" ? "lg:w-1/2 sm:2/3 w-full p-5 relative mx-auto my-auto rounded-md shadow-lg  bg-white overflow-y-auto mt-1 mb-1 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100":"lg:w-1/2 sm:2/3 w-full p-5 relative mx-auto my-auto rounded-md shadow-lg  bg-white h-full overflow-y-auto mt-1 mb-1 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100"} ref={newPostRef}>
                     <span className="absolute right-0 top-0 p-2 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none"   onClick={closeModal} viewBox="0 0 24 24" stroke="currentColor">
             <path  d="M6 18L18 6M6 6l12 12" />
             </svg></span>

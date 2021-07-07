@@ -1,10 +1,10 @@
 import { BrowserRouter, Route, Switch ,Link,Redirect} from 'react-router-dom';
-import MainPage from './components/MainPage';
-import PostById from './components/Posts/PostById';
-import Navbar from "./components/Navbar";
-import useAuth from './components/useAuth';
-import AllPostsByUserId from './components/Posts/AllPostsByUserId';
-import UserProfile from './components/User/UserProfile';
+import {MainPage} from './components/MainPage';
+import {PostById} from './components/Posts/PostById';
+import {Navbar} from "./components/Navbar";
+import useAuth from './Hooks/useAuth';
+import {AllPostsByUserId} from './components/Posts/AllPostsByUserId';
+import {UserProfile} from './components/User/UserProfile';
 
 
 export default function App() {

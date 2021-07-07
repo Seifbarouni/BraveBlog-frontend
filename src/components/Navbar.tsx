@@ -1,18 +1,13 @@
-import { useEffect, useRef, useState } from "react";
 import {Link} from "react-router-dom";
-import DropDown from "./DropDown";
-import LoginPopup from "./Popups/LoginPopup";
-import NewPostPopup from "./Popups/NewPostPopup";
-import RegisterPopup from "./Popups/RegisterPopup";
+import {DropDown} from "./DropDown";
+import {LoginPopup} from "./Popups/LoginPopup";
+import {NewPostPopup} from "./Popups/NewPostPopup";
+import {RegisterPopup} from "./Popups/RegisterPopup";
+import { useOutsideAlerter } from "../Hooks/useOutsideAlerter";
 
 
 
-const Navbar:React.FC<any>= ({authData,setAuthData})=> {
-  const [isLoginModalOpen, setLoginModal] = useState<boolean>(false);
-  const [isRegisterModalOpen, setRegisterModal] = useState<boolean>(false);
-  const [isAddPostModalOpen, setAddPostModal] = useState<boolean>(false);
-  const [isDropdownOpen, setDropdown] = useState<boolean>(false);
-  
+export const Navbar:React.FC<any>= ({authData,setAuthData})=> {
   
   const OpenLoginModal=()=>{
     setLoginModal(true);
@@ -28,46 +23,40 @@ const Navbar:React.FC<any>= ({authData,setAuthData})=> {
     localStorage.removeItem("auth");
   }
   const toggleDropdown=()=>{
-    setDropdown(!isDropdownOpen);
+    setOpen(!isOpen);
   }
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const handleClickOutside = (e:any)=>{
-        if(dropdownRef.current &&!dropdownRef.current.contains(e.target)){
-          setDropdown(false);
-        }
-    }
-    document.addEventListener("mousedown",handleClickOutside
-    ,true);
-    return ()=>{
-      document.removeEventListener("mousedown",handleClickOutside);
-    }
-  },[dropdownRef])
+  const {ref,isOpen,setOpen} = useOutsideAlerter(false);
+  const {ref:loginRef,isOpen:isLoginModalOpen,setOpen:setLoginModal} = useOutsideAlerter(false);
+  const {ref:registerRef,isOpen:isRegisterModalOpen,setOpen:setRegisterModal} = useOutsideAlerter(false);
+  const {ref:newPostRef,isOpen:isAddPostModalOpen,setOpen:setAddPostModal} = useOutsideAlerter(false);
+  
   const logo="/images/logo.png"
     return (
-        <div className="border flex items-center lg:justify-around justify-between p-2 bg-white shadow-sm">
+        <div className="border flex items-center lg:justify-around justify-between p-2 bg-white shadow-sm sticky top-0 z-50">
       <Link to="/"  className="flex items-center cursor-pointer">
-        <img src={logo} alt="" className="h-12 w-12"/>
+        <img src={logo} alt="" className="h-12 w-12 hover:animate-spin"/>
         <span className="font-bold ml-2">Blaviken</span>
       </Link>
       {authData&&authData.message!=="Success" &&
       <div className="flex items-center">
       
-      {isLoginModalOpen ? <LoginPopup setLoginModal={setLoginModal} setAuthData={setAuthData}/>:""}
-      {isRegisterModalOpen ? <RegisterPopup setRegisterModal={setRegisterModal} setAuthData={setAuthData}/>:""}
-      <span className="hover:underline cursor-pointer" onClick={OpenLoginModal}>Log in</span>
-      <span className="rounded-full bg-black  hover:bg-gray-800 cursor-pointer text-white px-2 py-1 ml-2" onClick={OpenRegisterModal}>Register</span>
+      {isLoginModalOpen ? 
+<LoginPopup setLoginModal={setLoginModal} setAuthData={setAuthData} loginRef={loginRef}/>
+      :""}
+      {isRegisterModalOpen ? <RegisterPopup setRegisterModal={setRegisterModal} setAuthData={setAuthData} registerRef={registerRef}/>:""}
+      <span className="hover:underline cursor-pointer mr-4" onClick={OpenLoginModal}>Log in</span>
+      <span className="rounded-md bg-black  hover:bg-gray-800 cursor-pointer text-white px-4 py-1 " onClick={OpenRegisterModal}>Register</span>
     </div>}
     {authData&&authData.message==="Success" &&
     <div className="flex items-center sm:text-base text-sm font-bold">
       <Link to="/myPosts"  className="cursor-pointer mr-2 hover:text-gray-700">My posts</Link>
       <div className="cursor-pointer mr-2 hover:text-gray-700" onClick={OpenAddPostModal}>New post</div>
-      {isAddPostModalOpen ? <NewPostPopup setAddPostModal={setAddPostModal} authData={authData}/> :""}
+      {isAddPostModalOpen ? <NewPostPopup setAddPostModal={setAddPostModal} authData={authData} newPostRef={newPostRef}/> :""}
       <div  className="relative cursor-pointer">
       <img src={authData.picUrl} alt="profile pic" className="h-10 w-10 rounded-full ring-2 ring-gray-700" title={authData.username} onClick={toggleDropdown}/>
       <div className="h-2 w-2 rounded-full bg-green-500 absolute right-0 bottom-0"></div>
-      {isDropdownOpen &&
-     <DropDown dropdownRef={dropdownRef} logout={logout}/>
+      {isOpen &&
+     <DropDown dropdownRef={ref} logout={logout}/>
       }
       </div>
     </div>
@@ -75,6 +64,4 @@ const Navbar:React.FC<any>= ({authData,setAuthData})=> {
       
     </div>
     )
-};
-
-export default Navbar;
+}

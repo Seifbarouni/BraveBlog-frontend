@@ -1,8 +1,10 @@
 import {Link} from "react-router-dom";
+import { useAnimation } from "../Hooks/useAnimation";
 
- const DropDown:React.FC<any> = ({dropdownRef,logout}) => {
+export const DropDown:React.FC<any> = ({dropdownRef,logout}) => {
+  const {props,a}=useAnimation();
     return (
-        <div className="absolute right-2  mt-1 bg-white rounded-md shadow-2xl flex flex-col w-36"  ref={dropdownRef}>
+        <a.div style={props} className="absolute right-2  mt-1 bg-white rounded-md shadow-2xl flex flex-col w-36"  ref={dropdownRef}>
         <Link to="/profile" className=" hover:bg-gray-200 rounded-t-md flex justify-start items-center px-2 py-2 border-b border-gray-300">
                   <span>
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -19,8 +21,6 @@ import {Link} from "react-router-dom";
           </span>
           <span className="ml-1">Logout</span>
         </div>
-      </div>
+      </a.div>
     )
 }
-
-export default DropDown;

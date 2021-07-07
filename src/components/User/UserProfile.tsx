@@ -1,15 +1,12 @@
 import React, { useState } from "react";
-import {authenticationData} from "../useAuth";
+import {authenticationData} from "../../Hooks/useAuth";
 
 interface Props{
     authData : authenticationData
     setAuthData:any
 }
 
-
-
-
-const UserProfile:React.FC<Props> = ({authData,setAuthData}) => {
+export const UserProfile:React.FC<Props> = ({authData,setAuthData}) => {
     const[newUsername,setNewUsername]=useState<string>(authData.username);
     const[newEmail,setNewEmail]=useState<string>(authData.email);
     const[newImage,setNewImage]=useState<string>(authData.picUrl);
@@ -73,5 +70,3 @@ const UserProfile:React.FC<Props> = ({authData,setAuthData}) => {
         </div>
     )
 }
-
-export default UserProfile;

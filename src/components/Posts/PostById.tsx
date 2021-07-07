@@ -2,6 +2,7 @@ import {useParams,useLocation} from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import Loading from "../Spinners/Loading";
+import { useAnimation } from "../../Hooks/useAnimation";
 
 interface Props{
   jwt:string,
@@ -22,7 +23,7 @@ interface PostWithBg{
     likes:number
 }
 
-const PostById:React.FC<Props>=({jwt,userId})=>{
+export const PostById:React.FC<Props>=({jwt,userId})=>{
   const GetUserUrlFromLocationState=()=>{
     const location = useLocation<any>();
     return location.state?.userUrl;
@@ -31,6 +32,7 @@ const PostById:React.FC<Props>=({jwt,userId})=>{
   const [like, setLike] = useState<string>("not liked");
   const [likesNumber,setLikesNumber]=useState<number>(0);
   const [loading,setLoading]=useState<boolean>(true);
+  const {props,a}= useAnimation();
   const userUrl = GetUserUrlFromLocationState()
   const updateLike = ()=>{
     like==="liked" ? setLike("not liked"):setLike("liked")
@@ -101,7 +103,7 @@ const PostById:React.FC<Props>=({jwt,userId})=>{
       <div className="flex  justify-center lg:w-1/2">
         {!loading ?
         
-        <div className="flex  justify-center  self-center mb-2">
+        <a.div style={props} className="flex  justify-center  self-center mb-2">
             <div className="mt-8  md:flex hidden w-1/12 justify-center">
             <div className="flex flex-col items-center"  onClick={updateLike}><img src={like==="liked"?"/images/like.svg":"/images/blacklike.svg"} alt="heart" onClick={like==="liked"?dislikePost:likePost} 
             className="cursor-pointer h-6 w-6" /> <span className="font-bold mt-2">{likesNumber}</span></div>
@@ -112,7 +114,7 @@ const PostById:React.FC<Props>=({jwt,userId})=>{
                 <img src={post.bgUrl} alt="" className="object-fit  w-full rounded-t-md"/>
             </div>
           <div className="flex flex-col p-2">
-              <div className="font-bold mt-2 lg:text-2xl text-xl hover:text-blue-600 cursor-pointer">
+              <div className="font-bold mt-2 lg:text-3xl text-xl hover:text-blue-600 cursor-pointer">
               {post.title}
             </div>
             <div className="flex md:hidden mt-3">
@@ -136,12 +138,10 @@ const PostById:React.FC<Props>=({jwt,userId})=>{
                  
              </div>
         </div>
-        </div>
+        </a.div>
       :
       <Loading/>
       }
       </div>
     )
 }
-
-export default PostById;

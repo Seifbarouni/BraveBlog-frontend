@@ -26,7 +26,7 @@ const Post:React.FC<Props>=({username,title,likes,createdAt,postId})=>{
             state:{userUrl:userUrl},
           }} className="flex bg-white p-2 rounded-md shadow-md mt-2 cursor-pointer  border-2 border-white  hover:border-black lg:w-1/2 w-3/4">
              <div  className="mt-1">
-               <img src={userUrl} alt="img"  className="h-8 w-8 rounded-full"/>
+               <img src={userUrl} alt="img"  className="lg:h-10 lg:w-10 h-8 w-8 rounded-full"/>
              </div>
              <div className="w-full">
               <div className="lg:text-base text-sm ml-1">{username} <br />{createdAt}</div>

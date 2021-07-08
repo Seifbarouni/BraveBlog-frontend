@@ -5,6 +5,7 @@ import {Navbar} from "./components/Navbar";
 import useAuth from './Hooks/useAuth';
 import {AllPostsByUserId} from './components/Posts/AllPostsByUserId';
 import {UserProfile} from './components/User/UserProfile';
+import { Live } from './components/Live/Live';
 
 
 export default function App() {
@@ -46,6 +47,9 @@ export default function App() {
          </Link>
          </div>
            }
+          </Route>
+          <Route path="/live">
+           <Live authData={authData}/>
           </Route>
           <Route>
             <div className="text-center mt-12 text-xl font-bold">

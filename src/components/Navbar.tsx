@@ -44,17 +44,17 @@ export const Navbar:React.FC<any>= ({authData,setAuthData})=> {
 <LoginPopup setLoginModal={setLoginModal} setAuthData={setAuthData} loginRef={loginRef}/>
       :""}
       {isRegisterModalOpen ? <RegisterPopup setRegisterModal={setRegisterModal} setAuthData={setAuthData} registerRef={registerRef}/>:""}
-      <div className="mr-4 cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+      <Link to="/live" className="mr-4 cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
         <img src="/images/live.svg" alt="" />
-      </div>
+      </Link>
       <span className="hover:underline cursor-pointer mr-4" onClick={OpenLoginModal}>Log in</span>
       <span className="rounded-md bg-black  hover:bg-gray-800 cursor-pointer text-white px-4 py-1 " onClick={OpenRegisterModal}>Register</span>
     </div>}
     {authData&&authData.message==="Success" &&
     <div className="flex items-center sm:text-base text-sm font-bold">
-      <div className="mr-2 cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+      <Link to="/live" className="mr-2 cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
         <img src="/images/live.svg" alt="" />
-      </div>
+      </Link>
       <Link to="/myPosts"  className="cursor-pointer mr-2 hover:text-gray-700">My posts</Link>
       <div className="cursor-pointer mr-2 hover:text-gray-700" onClick={OpenAddPostModal}>New post</div>
       {isAddPostModalOpen ? <NewPostPopup setAddPostModal={setAddPostModal} authData={authData} newPostRef={newPostRef}/> :""}

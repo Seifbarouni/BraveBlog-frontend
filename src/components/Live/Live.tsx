@@ -1,11 +1,13 @@
 import {authenticationData} from "../../Hooks/useAuth";
-import {io, Socket} from "socket.io-client";
+import {Socket} from "socket.io-client";
 import { useEffect ,useState} from "react";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
+import {Link} from "react-router-dom";
 
 
 interface Props{
     authData:authenticationData,
+    socket:Socket<DefaultEventsMap,DefaultEventsMap>|undefined
 }
 
 interface RoomData{
@@ -13,29 +15,11 @@ interface RoomData{
     username:string,
 }
 
-export const Live:React.FC<Props> = ({authData}) => {
-    const [socket,setSocket]=useState<Socket<DefaultEventsMap,DefaultEventsMap>>();
+export const Live:React.FC<Props> = ({authData,socket}) => {
     const [rooms,setRooms]=useState<string[]>([]);
     const [roomsData,setRoomsData]=useState<RoomData[]>([]);
-
-    /* const getImageRequest = async (username:string)=> {
-        const resp= await fetch(`http://localhost:9000/getUser/${username}`);
-        const res = await resp.text();
-        return res;
-    }
-    const getImage=(username:string):string=>{
-        return JSON.stringify(getImageRequest(username));
-    } */
-    const join=()=>{
-        socket?.emit("joinRoom",`live/${authData.userId}/${authData.username}`)
-    }
-    useEffect(() => {
-        setSocket(io("http://localhost:3001"));
-        return () => {
-            socket?.disconnect();
-        }
-
-    }, [])
+    
+    
     useEffect(()=>{
         socket?.on("get-all-rooms-response",(data:string[])=>{
             setRooms(data);
@@ -57,20 +41,23 @@ export const Live:React.FC<Props> = ({authData}) => {
                     </span>
                     <span className="ml-1 font-bold md:text-base text-sm">This feature is not done yet</span>
                 </div>
-            {authData.message==="Success" && <div className="right-0 mr-2 px-2 py-1 bg-blue-600 text-white mt-2 rounded-md cursor-pointer hover:bg-blue-700" onClick={join}>Go live !</div>}
+            {authData.message==="Success" && <Link to={`room/${authData.userId}/${authData.username}`} className="right-0 mr-2 px-2 py-1 bg-blue-600 text-white mt-2 rounded-md cursor-pointer hover:bg-blue-700" >Go live !</Link>}
             
         {roomsData.length!==0?
         roomsData.map((room)=>{
-        return(<div key={room.userId} className="flex flex-col bg-white p-2 rounded-md shadow-md mt-2 cursor-pointer  border-2 border-white  hover:border-black lg:w-1/2 w-3/4"  >
+        return(<Link to={`room/${room.userId}/${room.username}`}
+           key={room.userId} className="flex flex-col bg-white p-2 rounded-md shadow-md mt-2 cursor-pointer  border-2 border-white  hover:border-black lg:w-1/2 w-3/4"  >
              <div  className="mt-1 flex items-center justify-between">
                  <div className="flex items-center">
-               <img src={authData.picUrl} alt="img"  className="lg:h-10 lg:w-10 h-8 w-8 rounded-full"/>
-              <div className="lg:text-base text-sm ml-2">{room.username} is live!</div>
+               <div  className="lg:h-10 lg:w-10 h-8 w-8 rounded-full bg-gray-500"/>
+              <div className="lg:text-base text-sm ml-2"><span className="font-extrabold">{room.username===authData.username?"You":room.username}</span> {room.username===authData.username?" are":"is"} live !</div>
+                
+                
                  </div>
                  <div className="rounded-full h-2 w-2 bg-red-600 mr-3 animate-pulse">
                  </div>
              </div>
-          </div>)
+          </Link>)
         })
         
     :<div className="mt-2 font-extrabold">No one is live right now</div>  }

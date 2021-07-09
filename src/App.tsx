@@ -6,10 +6,20 @@ import useAuth from './Hooks/useAuth';
 import {AllPostsByUserId} from './components/Posts/AllPostsByUserId';
 import {UserProfile} from './components/User/UserProfile';
 import { Live } from './components/Live/Live';
+import { LivePost } from './components/Live/LivePost';
+import { useEffect, useState } from 'react';
+import { io, Socket } from 'socket.io-client';
+import { DefaultEventsMap } from 'socket.io-client/build/typed-events';
 
 
 export default function App() {
- 
+  const [socket,setSocket]=useState<Socket<DefaultEventsMap,DefaultEventsMap>>();
+  useEffect(() => {
+    setSocket(io("http://localhost:3001"));
+    return () => {
+        socket?.disconnect();
+    }
+}, [])
   const {authData, saveData} = useAuth();
   return (
     <div>
@@ -49,7 +59,10 @@ export default function App() {
            }
           </Route>
           <Route path="/live">
-           <Live authData={authData}/>
+           <Live authData={authData} socket={socket}/>
+          </Route>
+          <Route path="/room/:userId/:username">
+           <LivePost authData={authData} socket={socket}/>
           </Route>
           <Route>
             <div className="text-center mt-12 text-xl font-bold">

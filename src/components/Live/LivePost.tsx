@@ -71,15 +71,16 @@ export const LivePost:React.FC<Props> = ({authData,socket}) => {
             setTitle(data)
         })
         
-        socket.on("comment",(data:Comment)=>{
-            allComments.push(data)
-            setAllComments(allComments)
+        socket.on("comment",(comment:Comment)=>{
+            setAllComments((prev)=>
+                [...prev,comment]
+            );
         })
         socket.on("end",()=>{
             setStreamEnded(true)
             if((authData&&authData.username!==username) || (authData&&authData.message!=="Success")){
                 setTimeout(()=>{
-                    window.location.href="/"
+                    window.location.href="/live"
                 },2000)
             }
         })
@@ -89,11 +90,11 @@ export const LivePost:React.FC<Props> = ({authData,socket}) => {
             <div className="flex flex-col items-center justify-center w-full">
                 {streamEnded && <div className="w-full bg-red-600 text-gray-100 text-center font-bold md:text-base text-sm px-1 py-2">Stream ended</div>}
             {authData && authData.message==="Success" && authData.username===username?
-            <div className="flex lg:flex-row flex-col  justify-center">
+            <div className="flex lg:flex-row flex-col  justify-center mb-2">
                 <div className="flex flex-col justify-center items-center bg-white shadow-md rounded-md mt-2 p-1 ">
                 <div className="mt-2 font-bold">It's easy and free to post your thinking on any topic and connect with millions of readers.</div>
                 <input type="text" placeholder="Title"  onChange={updateTitle}className="placeholder-gray-700 ring-1 ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm mt-2  w-3/4" required autoFocus/>
-                <textarea className="mt-2 mb-2 placeholder-gray-700 ring-2  ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm w-3/4 " cols={30} rows={10}  onChange={updateText} defaultValue={text}></textarea>
+                <textarea className="mt-2 mb-2 placeholder-gray-700 ring-2  ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm w-3/4 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100" cols={30} rows={10}  onChange={updateText} defaultValue={text}></textarea>
                 </div>
                 <div className="bg-white shadow-md rounded-md mt-2 p-1 lg:ml-2 lg:w-1/4 flex flex-col ">
                     <span className="mt-2 font-extrabold">Live chat</span>
@@ -102,7 +103,7 @@ export const LivePost:React.FC<Props> = ({authData,socket}) => {
                 </div>
             </div>
                 :
-                <div className="flex lg:flex-row flex-col  justify-center">
+                <div className="flex lg:flex-row flex-col  justify-center mb-2">
                 <div className="flex flex-col justify-center items-center bg-white shadow-md rounded-md mt-2 p-1 ">
                     <div className="mt-2 font-bold invisible">It's easy and free to post your thinking on any topic and connect with millions of readers.</div>
                 <div className="mt-2 font-bold">{username}'s post</div>

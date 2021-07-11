@@ -23,17 +23,19 @@ interface PostWithBg{
     likes:number
 }
 
+interface LocationState{
+  userUrl:string,
+  minRead:number
+}
+
 export const PostById:React.FC<Props>=({jwt,userId})=>{
-  const GetUserUrlFromLocationState=()=>{
-    const location = useLocation<any>();
-    return location.state?.userUrl;
-  }
+
   const {id} = useParams<Params>();
   const [like, setLike] = useState<string>("not liked");
   const [likesNumber,setLikesNumber]=useState<number>(0);
   const [loading,setLoading]=useState<boolean>(true);
   const {props,a}= useAnimation();
-  const userUrl = GetUserUrlFromLocationState()
+  const {userUrl,minRead} = useLocation<LocationState>().state
   const updateLike = ()=>{
     like==="liked" ? setLike("not liked"):setLike("liked")
   }
@@ -48,6 +50,7 @@ export const PostById:React.FC<Props>=({jwt,userId})=>{
   });
     useEffect(() => {
         const fetchPostData = async()=>{
+          document.title= "Brave Blog | Post "+id;
             const resp = await fetch(`http://localhost:9000/api/v1/posts/${id}`,{
               headers: {
                 "Content-Type": "application/json",
@@ -127,7 +130,7 @@ export const PostById:React.FC<Props>=({jwt,userId})=>{
                 </div>
               <div className="lg:text-base text-sm ml-1">{post.user} &nbsp;   {post.createdAt}</div>
             </span>
-           <span>{Math.floor((Math.random()*10)+1)} min read</span>
+           <span>{minRead} min read</span>
              </div>
             
           </div>

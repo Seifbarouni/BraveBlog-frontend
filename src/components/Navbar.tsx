@@ -35,7 +35,7 @@ export const Navbar:React.FC<any>= ({authData,setAuthData})=> {
         <div className="border flex items-center lg:justify-around justify-between p-2 bg-white shadow-sm sticky top-0 z-50">
       <Link to="/"  className="flex items-center cursor-pointer">
         <img src={logo} alt="" className="h-12 w-12"/>
-        <span className="font-bold ml-2">Blaviken</span>
+        <span className="font-bold ml-2">Brave Blog</span>
       </Link>
       {authData&&authData.message!=="Success" &&
       <div className="flex items-center">

@@ -15,6 +15,7 @@ export const UserProfile:React.FC<Props> = ({authData,setAuthData}) => {
     const {props,a}=useAnimation();
 
     useEffect(() => {
+        document.title = "Brave Blog | Profile";
         const getTotalLikes = async()=>{
             const resp = await fetch(`http://localhost:9000/api/v1/posts/likes/${authData.username}`,{
               headers: {

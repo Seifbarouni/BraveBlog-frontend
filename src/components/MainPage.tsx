@@ -6,6 +6,7 @@ import Loading from "./Spinners/Loading";
 interface PostWithoutBg{
       id:number,
       title:string,
+      content:string,
       user:string,
       createdAt:string,
       likes:number
@@ -16,6 +17,7 @@ export const MainPage:React.FC=()=>{
     const [loading,setLoading] = useState<boolean>(true);
     const {props,a}= useAnimation();
     useEffect(() => {
+        document.title = "Brave Blog"
         const fetchData = async()=>{
             const resp = await fetch("http://localhost:9000/api/v1/posts");
             setPosts(await resp.json());
@@ -28,7 +30,7 @@ export const MainPage:React.FC=()=>{
         <div>
              {loading===false ? <a.div style={props} className="flex flex-col  items-center mb-2">
         {posts.map((post)=>{
-            return (<Post key={post.id} username={post.user} title={post.title} likes={post.likes} createdAt={post.createdAt} postId={post.id}/>)
+            return (<Post key={post.id} username={post.user} title={post.title} likes={post.likes} createdAt={post.createdAt} postId={post.id} content={post.content}/>)
         })}
         </a.div>:
         <Loading/>

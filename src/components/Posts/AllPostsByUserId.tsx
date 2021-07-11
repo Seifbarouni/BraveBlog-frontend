@@ -11,6 +11,7 @@ interface Props{
 interface PostWithoutBg{
     id:number,
     title:string,
+    content:string
     user:string,
     createdAt:string,
     likes:number
@@ -21,6 +22,7 @@ export const AllPostsByUserId:React.FC<Props> = ({user,jwt}) => {
     const [loading,setLoading] = useState<boolean>(true);
     const {props,a}= useAnimation();
     useEffect(() => {
+        document.title = "Brave Blog | My posts"
         const fetchData = async()=>{
             const resp = await fetch(`http://localhost:9000/api/v1/posts/us/${user}`,{
                 headers: {
@@ -42,7 +44,7 @@ export const AllPostsByUserId:React.FC<Props> = ({user,jwt}) => {
             {userPosts.length!==0?
                <a.div style={props} className="flex flex-col  items-center mb-2">
             {userPosts.map((post)=>{
-                return (<Post key={post.id} username={post.user} title={post.title} likes={post.likes} createdAt={post.createdAt} postId={post.id}/>)
+                return (<Post key={post.id} username={post.user} title={post.title} likes={post.likes} createdAt={post.createdAt} postId={post.id} content={post.content}/>)
             })}
         </a.div> :
                 <div className="text-center mt-12 text-xl font-bold">

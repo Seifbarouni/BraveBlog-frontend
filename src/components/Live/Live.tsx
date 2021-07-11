@@ -3,6 +3,7 @@ import {Socket} from "socket.io-client";
 import { useEffect ,useState} from "react";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import {Link} from "react-router-dom";
+import { useAnimation } from "../../Hooks/useAnimation";
 
 
 interface Props{
@@ -18,8 +19,12 @@ interface RoomData{
 export const Live:React.FC<Props> = ({authData,socket}) => {
     const [rooms,setRooms]=useState<string[]>([]);
     const [roomsData,setRoomsData]=useState<RoomData[]>([]);
+    const {props,a}= useAnimation();
     
-    
+    useEffect(()=>{
+        document.title = "Brave Blogs | Live"
+    },[])
+
     useEffect(()=>{
         socket?.on("get-all-rooms-response",(data:string[])=>{
             setRooms(data);
@@ -34,7 +39,7 @@ export const Live:React.FC<Props> = ({authData,socket}) => {
         })
     },[socket])
     return (
-        <div className="flex flex-col justify-center items-center ">
+        <a.div style={props} className="flex flex-col justify-center items-center ">
             <div className="flex items-center px-1 py-2 bg-yellow-200 rounded-sm w-full mb-2 justify-center">
                     <span>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /> </svg>
@@ -61,6 +66,6 @@ export const Live:React.FC<Props> = ({authData,socket}) => {
         })
         
     :<div className="mt-2 font-extrabold">No one is live right now</div>  }
-        </div>
+        </a.div>
     )
 }

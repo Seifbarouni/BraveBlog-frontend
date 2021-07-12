@@ -32,7 +32,7 @@ export const Navbar:React.FC<any>= ({authData,setAuthData})=> {
   
   const logo="/images/logo.png"
     return (
-        <div className="border flex items-center lg:justify-around justify-between p-2 bg-white shadow-sm sticky top-0 z-50">
+        <div className="border flex items-center lg:justify-around justify-between p-2 bg-white shadow-sm sticky top-0 z-50 sm:text-base text-xs">
       <Link to="/"  className="flex items-center cursor-pointer">
         <img src={logo} alt="" className="h-12 w-12"/>
         <span className="font-bold ml-2">Brave Blog</span>
@@ -51,7 +51,7 @@ export const Navbar:React.FC<any>= ({authData,setAuthData})=> {
       <span className="rounded-md bg-black  hover:bg-gray-800 cursor-pointer text-white px-4 py-1 " onClick={OpenRegisterModal}>Register</span>
     </div>}
     {authData&&authData.message==="Success" &&
-    <div className="flex items-center sm:text-base text-sm font-bold">
+    <div className="flex items-center  font-bold">
       <Link to="/live" className="mr-2 cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
         <img src="/images/live.svg" alt="" />
       </Link>

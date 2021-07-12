@@ -83,7 +83,7 @@ export const UserProfile:React.FC<Props> = ({authData,setAuthData}) => {
             <form onSubmit={handleSubmit}>
                 <div className="mt-4">
                 <input type="text" defaultValue={newUsername} onChange={(e)=>setNewUsername(e.target.value)} placeholder="Username" className="placeholder-gray-700 ring-1 ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm" required/>
-                <input type="email" defaultValue={newEmail}  onChange={(e)=>setNewEmail(e.target.value)}placeholder="Email" className="placeholder-gray-700 ring-1 ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm ml-2" required/>
+                <input type="email" defaultValue={newEmail}  onChange={(e)=>setNewEmail(e.target.value)}placeholder="Email" className="placeholder-gray-700 ring-1 ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm sm:ml-2 sm:mt-0 mt-4" required/>
                 </div>
                 <input type="url" defaultValue={newImage} onChange={(e)=>setNewImage(e.target.value)}placeholder="Image URL" className="placeholder-gray-700 ring-1 ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm mt-4 w-full" required/>
                 <button type="submit" className=" bg-black  hover:bg-gray-800 cursor-pointer text-white px-2 py-1 mt-4 w-full rounded-sm">Update infromation</button>

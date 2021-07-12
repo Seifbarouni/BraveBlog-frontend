@@ -28,12 +28,12 @@ export const MainPage:React.FC=()=>{
     }, [])
     return (
         <div>
-             {loading===false ? <a.div style={props} className="flex flex-col  items-center mb-2">
+             {loading===true ?<Loading/>: <a.div style={props} className="flex flex-col  items-center mb-2">
         {posts.map((post)=>{
             return (<Post key={post.id} username={post.user} title={post.title} likes={post.likes} createdAt={post.createdAt} postId={post.id} content={post.content}/>)
         })}
-        </a.div>:
-        <Loading/>
+        </a.div>
+        
     } 
         </div>
       

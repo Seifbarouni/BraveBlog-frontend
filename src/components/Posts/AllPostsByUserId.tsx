@@ -38,8 +38,7 @@ export const AllPostsByUserId:React.FC<Props> = ({user,jwt}) => {
         return () => {}
     }, [user,jwt])
     return (
-        <div>
-            {!loading ?
+        
         <div>
             {userPosts.length!==0?
                <a.div style={props} className="flex flex-col  items-center mb-2">
@@ -47,15 +46,16 @@ export const AllPostsByUserId:React.FC<Props> = ({user,jwt}) => {
                 return (<Post key={post.id} username={post.user} title={post.title} likes={post.likes} createdAt={post.createdAt} postId={post.id} content={post.content}/>)
             })}
         </a.div> :
-                <div className="text-center mt-12 text-xl font-bold">
-                You have no posts!
-              </div>
+        <div>
+            {loading?<div className="text-center mt-12 text-xl font-bold">
+            You have no posts!
+          </div>
+        :
+        <Loading/>}
+        </div>
+            
                 }
         </div>    
-        :
-        <Loading/>
-        }
-            
-        </div>
+        
     )
 }

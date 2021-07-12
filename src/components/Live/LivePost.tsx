@@ -111,7 +111,7 @@ export const LivePost:React.FC<Props> = ({authData,socket}) => {
                 <div className="mt-2 font-bold">{username}'s post</div>
                 <input type="text" placeholder="Title" value={title} className="placeholder-gray-700 ring-1 ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm mt-2  w-3/4"  readOnly/>
                 <div className=" w-3/4 ring-2 ring-black rounded-sm p-1 mt-2 mb-12">
-                <ReactMarkdown className="prose prose-blue md:prose-lg break-all">{text}</ReactMarkdown>
+                <ReactMarkdown className="prose prose-blue md:prose-lg break-words">{text}</ReactMarkdown>
                 </div>
 
             </div>

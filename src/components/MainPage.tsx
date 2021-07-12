@@ -14,7 +14,7 @@ interface PostWithoutBg{
 
 export const MainPage:React.FC=()=>{
     const [posts, setPosts] = useState<PostWithoutBg[]>([]);
-    const [loading,setLoading] = useState<boolean>(true);
+   // const [loading,setLoading] = useState<boolean>(true);
     const {props,a}= useAnimation();
     useEffect(() => {
         document.title = "Brave Blog"
@@ -23,12 +23,12 @@ export const MainPage:React.FC=()=>{
             setPosts(await resp.json());
         }
         fetchData();
-        setLoading(false);
+       // setLoading(false);
         return () => {}
     }, [])
     return (
         <div>
-             {loading===true ?<Loading/>: <a.div style={props} className="flex flex-col  items-center mb-2">
+             {posts.length===0 ?<Loading/>: <a.div style={props} className="flex flex-col  items-center mb-2">
         {posts.map((post)=>{
             return (<Post key={post.id} username={post.user} title={post.title} likes={post.likes} createdAt={post.createdAt} postId={post.id} content={post.content}/>)
         })}

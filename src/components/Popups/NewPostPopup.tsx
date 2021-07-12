@@ -62,12 +62,12 @@ export const NewPostPopup:React.FC<Props> = ({setAddPostModal,authData,newPostRe
              <input type="url" placeholder="Image URL"  onChange={e=>setImageUrl(e.target.value)}
               className="mt-2 placeholder-gray-700 ring-1 ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm" required/>
               <div className="mt-2 px-1 py-1 bg-green-500 text-center rounded-sm font-normal">Supports Markdown! <a rel="noreferrer" target="_blank" href="https://www.markdownguide.org/getting-started"  className="underline font-bold">Read more</a></div>
-              <textarea className="mt-2 placeholder-gray-700 ring-1  ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm"  onChange={e=>setContent(e.target.value)}placeholder="Post content" cols={30} rows={10} required></textarea>
+              <textarea className="mt-2 placeholder-gray-700 ring-1  ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100"  onChange={e=>setContent(e.target.value)}placeholder="Post content" cols={30} rows={10} required></textarea>
               {content!==""?
               <div>
               <div className="mt-2">Preview content</div>
               <div className="mt-2  ring-1  ring-black px-1 py-1 rounded-sm" >
-                  <ReactMarkdown children={content} className="prose prose-blue md:prose-lg"/>
+                  <ReactMarkdown children={content} className="prose prose-blue md:prose-lg break-words"/>
               </div>
               </div>
             :""}

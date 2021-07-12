@@ -16,7 +16,7 @@ export const LoginPopup:React.FC<Props>=({setLoginModal,setAuthData,loginRef})=>
         setLoginModal(false)
     }
     const login = async (username:string,password:string)=>{
-        const resp = await fetch("http://localhost:9000/auth",{
+        const resp = await fetch("https://brave-blog-api.herokuapp.com/auth",{
             method: "POST",
             headers: {
               "Content-Type": "application/json",

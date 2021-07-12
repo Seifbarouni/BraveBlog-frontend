@@ -19,7 +19,7 @@ export const NewPostPopup:React.FC<Props> = ({setAddPostModal,authData,newPostRe
         setAddPostModal(false);
     }
     const post = async (title:string,imageUrl:string,content:string)=>{
-        const resp = await fetch("http://localhost:9000/api/v1/posts/addPost",{
+        const resp = await fetch("https://brave-blog-api.herokuapp.com/api/v1/posts/addPost",{
             method: "POST",
             headers: {
               "Content-Type": "application/json",

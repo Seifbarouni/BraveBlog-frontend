@@ -19,7 +19,7 @@ export const MainPage:React.FC=()=>{
     useEffect(() => {
         document.title = "Brave Blog"
         const fetchData = async()=>{
-            const resp = await fetch("http://localhost:9000/api/v1/posts");
+            const resp = await fetch("https://brave-blog-api.herokuapp.com/api/v1/posts");
             setPosts(await resp.json());
         }
         fetchData();

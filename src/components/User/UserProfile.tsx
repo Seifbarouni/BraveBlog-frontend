@@ -17,7 +17,7 @@ export const UserProfile:React.FC<Props> = ({authData,setAuthData}) => {
     useEffect(() => {
         document.title = "Brave Blog | Profile";
         const getTotalLikes = async()=>{
-            const resp = await fetch(`http://localhost:9000/api/v1/posts/likes/${authData.username}`,{
+            const resp = await fetch(`https://brave-blog-api.herokuapp.com/api/v1/posts/likes/${authData.username}`,{
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${authData.jwt}`,
@@ -31,7 +31,7 @@ export const UserProfile:React.FC<Props> = ({authData,setAuthData}) => {
 
     const updateProfile = async(newUsername:string,newEmail:string,newImage:string)=>{
         if(newUsername!==authData.username|| newEmail!==authData.email || newImage!==authData.picUrl){
-            const resp = await fetch("http://localhost:9000/updateUser",{
+            const resp = await fetch("https://brave-blog-api.herokuapp.com/updateUser",{
                 method:"POST",
               headers: {
                 "Content-Type": "application/json",

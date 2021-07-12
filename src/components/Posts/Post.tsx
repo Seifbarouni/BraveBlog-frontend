@@ -17,7 +17,7 @@ const Post:React.FC<Props>=({username,title,likes,createdAt,postId,content})=>{
   const wpm = 200;
   useEffect(()=>{
     const getImage = async (username:string)=> {
-      const resp = await fetch(`http://localhost:9000/getUser/${username}`);
+      const resp = await fetch(`https://brave-blog-api.herokuapp.com/getUser/${username}`);
       const data = await resp.text();
       setUserUrl(data);
   }

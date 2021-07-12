@@ -51,7 +51,7 @@ export const PostById:React.FC<Props>=({jwt,userId})=>{
     useEffect(() => {
         const fetchPostData = async()=>{
           document.title= "Brave Blog | Post "+id;
-            const resp = await fetch(`http://localhost:9000/api/v1/posts/${id}`,{
+            const resp = await fetch(`https://brave-blog-api.herokuapp.com/api/v1/posts/${id}`,{
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${jwt}`,
@@ -63,7 +63,7 @@ export const PostById:React.FC<Props>=({jwt,userId})=>{
         }
 
         const checkIfPostLiked = async ()=>{
-          const resp = await fetch(`http://localhost:9000/l/didLike/${id}/${userId}`,{
+          const resp = await fetch(`https://brave-blog-api.herokuapp.com/l/didLike/${id}/${userId}`,{
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${jwt}`,
@@ -81,7 +81,7 @@ export const PostById:React.FC<Props>=({jwt,userId})=>{
     const dislikePost=async()=>{
       setLikesNumber(likesNumber-1);
       setLike("not liked");
-      const resp = await fetch(`http://localhost:9000/l/dislike/${id}/${userId}`,{
+      const resp = await fetch(`https://brave-blog-api.herokuapp.com/l/dislike/${id}/${userId}`,{
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${jwt}`,
@@ -93,7 +93,7 @@ export const PostById:React.FC<Props>=({jwt,userId})=>{
     const likePost=async ()=>{
       setLikesNumber(likesNumber+1);
       setLike("liked");
-      const resp = await fetch(`http://localhost:9000/l/like/${id}/${userId}`,{
+      const resp = await fetch(`https://brave-blog-api.herokuapp.com/l/like/${id}/${userId}`,{
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${jwt}`,

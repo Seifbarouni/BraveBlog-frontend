@@ -18,7 +18,7 @@ export const RegisterPopup:React.FC<Props>=({setRegisterModal,setAuthData,regist
     }
 
   const register = async (username:string,password:string,imgUrl:string,email:string)=>{
-    const resp = await fetch("http://localhost:9000/register",{
+    const resp = await fetch("https://brave-blog-api.herokuapp.com/register",{
         method: "POST",
         headers: {
           "Content-Type": "application/json",

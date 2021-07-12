@@ -24,7 +24,7 @@ export const AllPostsByUserId:React.FC<Props> = ({user,jwt}) => {
     useEffect(() => {
         document.title = "Brave Blog | My posts"
         const fetchData = async()=>{
-            const resp = await fetch(`http://localhost:9000/api/v1/posts/us/${user}`,{
+            const resp = await fetch(`https://brave-blog-api.herokuapp.com/api/v1/posts/us/${user}`,{
                 headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${jwt}`,

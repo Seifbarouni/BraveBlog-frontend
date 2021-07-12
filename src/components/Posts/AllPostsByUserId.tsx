@@ -35,7 +35,6 @@ export const AllPostsByUserId:React.FC<Props> = ({user,jwt}) => {
 
         fetchData();
         setLoading(false);
-        return () => {}
     }, [user,jwt])
     return (
         
@@ -43,7 +42,7 @@ export const AllPostsByUserId:React.FC<Props> = ({user,jwt}) => {
             {userPosts.length!==0?
                <a.div style={props} className="flex flex-col  items-center mb-2">
             {userPosts.map((post)=>{
-                return (<Post key={post.id} username={post.user} title={post.title} likes={post.likes} createdAt={post.createdAt} postId={post.id} content={post.content}/>)
+                return (<Post key={post.id} username={post.user} title={post.title} likes={post.likes} createdAt={post.createdAt} postId={post.id} content={post.content} authenticatedUser={user} setAllPosts={setUserPosts} jwt={jwt}/>)
             })}
         </a.div> :
         <div>

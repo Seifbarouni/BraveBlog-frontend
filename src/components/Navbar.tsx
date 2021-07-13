@@ -4,6 +4,7 @@ import { LoginPopup } from "./Popups/LoginPopup";
 import { NewPostPopup } from "./Popups/NewPostPopup";
 import { RegisterPopup } from "./Popups/RegisterPopup";
 import { useOutsideAlerter } from "../Hooks/useOutsideAlerter";
+import { useState } from "react";
 
 export const Navbar: React.FC<any> = ({ authData, setAuthData }) => {
   const OpenLoginModal = () => {
@@ -17,6 +18,7 @@ export const Navbar: React.FC<any> = ({ authData, setAuthData }) => {
   };
   const logout = () => {
     setAuthData({ message: "not authenticated" });
+    setIsDropDownOpen(false);
     localStorage.removeItem("auth");
   };
   const toggleDropdown = () => {
@@ -38,12 +40,11 @@ export const Navbar: React.FC<any> = ({ authData, setAuthData }) => {
     isOpen: isAddPostModalOpen,
     setOpen: setAddPostModal,
   } = useOutsideAlerter(false);
-
-  const logo = "/images/logo.png";
+  const [isDropDownOpen, setIsDropDownOpen] = useState<boolean>(false);
   return (
-    <div className="border flex items-center lg:justify-around justify-between p-2 bg-white shadow-sm sticky top-0 z-50 sm:text-base text-xs">
+    <div className="border flex sm:flex-row flex-col sm:items-center lg:justify-around justify-between p-2 bg-white shadow-sm sticky top-0 z-50 ">
       <Link to="/" className="flex items-center cursor-pointer">
-        <img src={logo} alt="" className="h-12 w-12" />
+        <img src="/images/logo.png" alt="" className="h-12 w-12" />
         <span className="font-bold ml-2">Brave Blog</span>
       </Link>
       {authData && authData.message !== "Success" && (
@@ -68,40 +69,72 @@ export const Navbar: React.FC<any> = ({ authData, setAuthData }) => {
           )}
           <Link
             to="/live"
-            className="mr-4 cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110"
+            className="mr-4 cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 sm:flex hidden"
           >
             <img src="/images/live.svg" alt="" />
           </Link>
           <span
-            className="hover:underline cursor-pointer mr-4"
+            className="hover:underline cursor-pointer mr-4 sm:flex hidden"
             onClick={OpenLoginModal}
           >
             Log in
           </span>
           <span
-            className="rounded-md bg-black  hover:bg-gray-800 cursor-pointer text-white px-4 py-1 "
+            className="rounded-md bg-black  hover:bg-gray-800 cursor-pointer text-white px-4 py-1 sm:flex hidden"
             onClick={OpenRegisterModal}
           >
             Register
           </span>
+          <span
+            className="cursor-pointer flex sm:hidden mr-2 absolute right-2 top-7"
+            onClick={() => setIsDropDownOpen(!isDropDownOpen)}
+          >
+            <img
+              src="/images/down-arrow.svg"
+              alt="openDropDown"
+              className="h-3 w-3"
+            />
+          </span>
+          {isDropDownOpen && (
+            <div className="flex flex-col sm:hidden ml-14 font-bold">
+              <Link
+                to="/live"
+                className="mr-4 cursor-pointer hover:text-gray-700"
+              >
+                Live
+              </Link>
+              <span
+                className="cursor-pointer mr-4 hover:text-gray-700"
+                onClick={OpenLoginModal}
+              >
+                Log in
+              </span>
+              <span
+                className="cursor-pointer mr-4 hover:text-gray-700"
+                onClick={OpenRegisterModal}
+              >
+                Register
+              </span>
+            </div>
+          )}
         </div>
       )}
       {authData && authData.message === "Success" && (
         <div className="flex items-center  font-bold">
           <Link
             to="/live"
-            className="mr-2 cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110"
+            className="mr-2 cursor-pointer transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 sm:flex hidden"
           >
             <img src="/images/live.svg" alt="" />
           </Link>
           <Link
             to="/myPosts"
-            className="cursor-pointer mr-2 hover:text-gray-700"
+            className="cursor-pointer mr-2 hover:text-gray-700 sm:flex hidden"
           >
             My posts
           </Link>
           <div
-            className="cursor-pointer mr-2 hover:text-gray-700"
+            className="cursor-pointer mr-2 hover:text-gray-700 sm:flex hidden"
             onClick={OpenAddPostModal}
           >
             New post
@@ -115,7 +148,7 @@ export const Navbar: React.FC<any> = ({ authData, setAuthData }) => {
           ) : (
             ""
           )}
-          <div className="relative cursor-pointer">
+          <div className="relative cursor-pointer sm:flex hidden">
             <img
               src={authData.picUrl}
               alt="profile pic"
@@ -126,6 +159,50 @@ export const Navbar: React.FC<any> = ({ authData, setAuthData }) => {
             <div className="h-2 w-2 rounded-full bg-green-500 absolute right-0 bottom-0"></div>
             {isOpen && <DropDown dropdownRef={ref} logout={logout} />}
           </div>
+          <span
+            className="cursor-pointer flex sm:hidden mr-2 absolute right-2 top-7"
+            onClick={() => setIsDropDownOpen(!isDropDownOpen)}
+          >
+            <img
+              src="/images/down-arrow.svg"
+              alt="openDropDown"
+              className="h-3 w-3"
+            />
+          </span>
+          {isDropDownOpen && (
+            <div className="flex flex-col sm:hidden ml-14 font-bold">
+              <Link
+                to="/live"
+                className="mr-4 cursor-pointer hover:text-gray-700"
+              >
+                Live
+              </Link>
+              <Link
+                to="/myPosts"
+                className="cursor-pointer mr-2 hover:text-gray-700"
+              >
+                My posts
+              </Link>
+              <div
+                className="cursor-pointer mr-2 hover:text-gray-700"
+                onClick={OpenAddPostModal}
+              >
+                New post
+              </div>
+              <Link
+                to="/profile"
+                className="cursor-pointer mr-2 hover:text-gray-700"
+              >
+                Profile
+              </Link>
+              <div
+                className="cursor-pointer mr-2 hover:text-gray-700"
+                onClick={logout}
+              >
+                Logout
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>

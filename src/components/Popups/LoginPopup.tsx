@@ -14,6 +14,7 @@ export const LoginPopup: React.FC<Props> = ({
 }) => {
   const [lUsername, setLUsername] = useState<string>("");
   const [lPassword, setLPassword] = useState<string>("");
+  const [errMessage, setErrMessage] = useState<string>("");
   const { props, a } = useAnimation();
   const closeModal = () => {
     setLoginModal(false);
@@ -31,11 +32,12 @@ export const LoginPopup: React.FC<Props> = ({
     });
     const data = await resp.json();
     if (data.message !== "Success") {
-      alert(data.message);
+      setErrMessage(data.message);
+    } else {
+      setAuthData(data);
+      setLoginModal(false);
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
     }
-    setAuthData(data);
-    setLoginModal(false);
-    document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
   };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,11 +69,17 @@ export const LoginPopup: React.FC<Props> = ({
             <img src="/images/logo.png" alt="" className="h-10 w-10" />
           </span>
           <span className="font-bold md:text-lg">Log in</span>
+          {errMessage !== "" && (
+            <div className="mt-1 text-red-600">{`❌ ${errMessage}`}</div>
+          )}
           <form className="mt-3 flex flex-col" onSubmit={handleSubmit}>
             <input
               type="text"
               placeholder="Username"
-              onChange={(e) => setLUsername(e.target.value)}
+              onChange={(e) => {
+                setErrMessage("");
+                setLUsername(e.target.value);
+              }}
               className="placeholder-gray-700 ring-1 ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm"
               required
               autoFocus
@@ -79,7 +87,10 @@ export const LoginPopup: React.FC<Props> = ({
             <input
               type="password"
               placeholder="Password"
-              onChange={(e) => setLPassword(e.target.value)}
+              onChange={(e) => {
+                setErrMessage("");
+                setLPassword(e.target.value);
+              }}
               className="mt-2 placeholder-gray-700 ring-1 ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm"
               required
             />

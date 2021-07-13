@@ -16,6 +16,7 @@ export const RegisterPopup: React.FC<Props> = ({
   const [rPassword, setRPassword] = useState<string>("");
   const [rEmail, setREmail] = useState<string>("");
   const [rImgUrl, setRImgUrl] = useState<string>("");
+  const [errMessages, setErrMessages] = useState<string[]>([]);
   const { props, a } = useAnimation();
   const closeModal = () => {
     setRegisterModal(false);
@@ -48,7 +49,14 @@ export const RegisterPopup: React.FC<Props> = ({
   };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    register(rUsername, rPassword, rImgUrl, rEmail);
+    const errors: string[] = [];
+    if (rUsername.length < 8)
+      errors.push("❌ Username must have 8 characters or more");
+    if (rPassword.length < 8)
+      errors.push("❌ Password must have 8 characters or more");
+    if (rPassword === "password") errors.push("❌ Password too easy");
+    if (errors.length !== 0) setErrMessages(errors);
+    else register(rUsername, rPassword, rImgUrl, rEmail);
   };
   return (
     <div className="min-h-screen fixed  left-0 top-0  flex justify-center items-center inset-0 z-50 outline-none focus:outline-none">
@@ -76,6 +84,15 @@ export const RegisterPopup: React.FC<Props> = ({
             <img src="/images/logo.png" alt="" className="h-10 w-10" />
           </span>
           <span className="font-bold md:text-lg">Register</span>
+          <div className="mt-1">
+            {errMessages.length !== 0 && (
+              <ul>
+                {errMessages.map((errMessage) => {
+                  return <li className="text-red-600">{errMessage}</li>;
+                })}
+              </ul>
+            )}
+          </div>
           <form className="mt-3 flex flex-col" onSubmit={handleSubmit}>
             <input
               type="text"

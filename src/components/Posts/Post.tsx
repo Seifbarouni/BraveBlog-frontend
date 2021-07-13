@@ -1,15 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-interface PostWithoutBg {
-  id: number;
-  title: string;
-  content: string;
-  user: string;
-  createdAt: string;
-  likes: number;
-}
-
 interface Props {
   username: string;
   title: string;
@@ -52,10 +43,10 @@ const Post: React.FC<Props> = ({
       }
     );
     const data = await resp.text();
-    if (data != "Success") alert(data);
+    if (data !== "Success") alert(data);
   };
 
-  const handleDelete = (e: Event, postId: number) => {
+  const handleDelete = (e: any) => {
     e.stopPropagation();
     e.preventDefault();
     deletePost();
@@ -87,7 +78,7 @@ const Post: React.FC<Props> = ({
       {authenticatedUser && authenticatedUser === username && (
         <div
           title="delete post"
-          onClick={(e: any) => handleDelete(e, postId)}
+          onClick={handleDelete}
           className="absolute right-1 top-1 cursor-pointer transition duration-500 ease-in-out transform hover:scale-110 hover:bg-gray-300 p-1 rounded-md"
         >
           <span>
@@ -95,7 +86,7 @@ const Post: React.FC<Props> = ({
           </span>
         </div>
       )}
-      <div className="mt-1">
+      <div className="mt-1 w-10 lg:w-12">
         <img
           src={userUrl}
           alt="img"

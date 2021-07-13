@@ -148,15 +148,15 @@ export const Navbar: React.FC<any> = ({ authData, setAuthData }) => {
           ) : (
             ""
           )}
-          <div className="relative cursor-pointer sm:flex hidden">
+          <div className="relative cursor-pointer">
             <img
               src={authData.picUrl}
               alt="profile pic"
-              className="h-10 w-10 rounded-full ring-2 ring-gray-700"
+              className="h-10 w-10 rounded-full ring-2 ring-gray-700 sm:flex hidden"
               title={authData.username}
               onClick={toggleDropdown}
             />
-            <div className="h-2 w-2 rounded-full bg-green-500 absolute right-0 bottom-0"></div>
+            <div className="h-2 w-2 rounded-full bg-green-500 absolute right-0 bottom-0 sm:flex hidden"></div>
             {isOpen && <DropDown dropdownRef={ref} logout={logout} />}
           </div>
           <span

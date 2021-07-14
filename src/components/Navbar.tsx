@@ -43,10 +43,12 @@ export const Navbar: React.FC<any> = ({ authData, setAuthData }) => {
   const [isDropDownOpen, setIsDropDownOpen] = useState<boolean>(false);
   return (
     <div className="border flex sm:flex-row flex-col sm:items-center lg:justify-around justify-between p-2 bg-white shadow-sm sticky top-0 z-50 ">
-      <Link to="/" className="flex items-center cursor-pointer">
-        <img src="/images/logo.png" alt="" className="h-12 w-12" />
+      <div className="flex items-center">
+        <Link to="/" className="flex items-center cursor-pointer">
+          <img src="/images/logo.png" alt="" className="h-12 w-12" />
+        </Link>
         <span className="font-bold ml-2">Brave Blog</span>
-      </Link>
+      </div>
       {authData && authData.message !== "Success" && (
         <div className="flex items-center">
           {isLoginModalOpen ? (

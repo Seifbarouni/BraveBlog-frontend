@@ -15,7 +15,7 @@ export default function App() {
   const [socket, setSocket] =
     useState<Socket<DefaultEventsMap, DefaultEventsMap>>();
   useEffect(() => {
-    setSocket(io("http://localhost:3001"));
+    setSocket(io("https://brave-blog-live-server.herokuapp.com"));
     return () => {
       socket?.disconnect();
     };

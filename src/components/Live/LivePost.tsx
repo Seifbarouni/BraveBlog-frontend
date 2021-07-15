@@ -77,7 +77,10 @@ export const LivePost: React.FC<Props> = ({ authData, socket }) => {
     const data = await resp.text();
     if (data !== "Success") {
       alert(data);
-    } else window.location.href = "/myPosts";
+    } else {
+      socket?.emit("cleanRoom", `room/${userId}/${username}`);
+      window.location.href = "/myPosts";
+    }
   };
   const submitPost = (e: FormEvent) => {
     e.preventDefault();

@@ -66,6 +66,7 @@ export const LivePost: React.FC<Props> = ({ authData, socket }) => {
     return () => {
       if (authData.username === username)
         socket?.emit("cleanRoom", `room/${userId}/${username}`);
+      else socket?.emit("leave", `room/${userId}/${username}`);
     };
   }, []);
   useEffect(() => {

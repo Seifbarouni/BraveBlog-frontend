@@ -2,12 +2,13 @@ import { authenticationData } from "../../Hooks/useAuth";
 import { Redirect, useParams } from "react-router-dom";
 import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
-import React, { useEffect } from "react";
+import React, { FormEvent, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import { useState } from "react";
 import { LiveChat } from "./LiveChat";
 import { Form } from "./Form";
 import { render } from "@testing-library/react";
+import moment from "moment";
 
 interface Props {
   authData: authenticationData;
@@ -27,6 +28,7 @@ export const LivePost: React.FC<Props> = ({ authData, socket }) => {
   const { userId, username } = useParams<Params>();
   const [text, setText] = useState<string>("");
   const [title, setTitle] = useState<string>("");
+  const [url, setUrl] = useState<string>("");
   const [comment, setComment] = useState<string>("");
   const [allComments, setAllComments] = useState<Comment[]>([]);
   const [streamEnded, setStreamEnded] = useState<boolean>(false);
@@ -49,6 +51,37 @@ export const LivePost: React.FC<Props> = ({ authData, socket }) => {
       room: `room/${userId}/${username}`,
       title: e.target.value,
     });
+  };
+  const updateImgUrl = (e: any) => {
+    setUrl(e.target.value);
+  };
+  const post = async (title: string, imageUrl: string, content: string) => {
+    const resp = await fetch(
+      "https://brave-blog-api.herokuapp.com/api/v1/posts/addPost",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authData.jwt}`,
+        },
+        body: JSON.stringify({
+          title: title,
+          content: content,
+          user: authData.username,
+          bgUrl: imageUrl,
+          createdAt: moment().format("ll"),
+          likes: 0,
+        }),
+      }
+    );
+    const data = await resp.text();
+    if (data !== "Success") {
+      alert(data);
+    } else window.location.href = "/myPosts";
+  };
+  const submitPost = (e: FormEvent) => {
+    e.preventDefault();
+    post(title, url, text);
   };
   const sendComment = (e: React.FormEvent) => {
     e.preventDefault();
@@ -114,21 +147,39 @@ export const LivePost: React.FC<Props> = ({ authData, socket }) => {
               It's easy and free to post your thinking on any topic and connect
               with millions of readers.
             </div>
-            <input
-              type="text"
-              placeholder="Title"
-              onChange={updateTitle}
-              className="placeholder-gray-700 ring-1 ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm mt-2  w-3/4"
-              required
-              autoFocus
-            />
-            <textarea
-              className="mt-2 mb-2 placeholder-gray-700 ring-2  ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm w-3/4 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100"
-              cols={30}
-              rows={10}
-              onChange={updateText}
-              defaultValue={text}
-            ></textarea>
+            <form
+              className="flex flex-col items-center w-full"
+              onSubmit={submitPost}
+            >
+              <input
+                type="text"
+                placeholder="Title"
+                onChange={updateTitle}
+                className="placeholder-gray-700 ring-1 ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm mt-2  w-3/4"
+                required
+                autoFocus
+              />
+              <input
+                type="text"
+                placeholder="Image URL"
+                onChange={updateImgUrl}
+                className="placeholder-gray-700 ring-1 ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm mt-2  w-3/4"
+                required
+              />
+              <textarea
+                className="mt-2 mb-2 placeholder-gray-700 ring-2  ring-black focus:ring-2 focus:outline-none px-1 py-1 rounded-sm w-3/4 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100"
+                cols={30}
+                rows={10}
+                onChange={updateText}
+                defaultValue={text}
+              ></textarea>
+              <button
+                type="submit"
+                className="rounded-md bg-black  hover:bg-gray-800 cursor-pointer text-white px-2 py-1 mt-1 mb-1"
+              >
+                Post
+              </button>
+            </form>
           </div>
           <div className="bg-white shadow-md rounded-md mt-2 p-1 lg:ml-2 lg:w-1/4 flex flex-col h-96">
             <span className="mt-2 font-extrabold">Live chat</span>

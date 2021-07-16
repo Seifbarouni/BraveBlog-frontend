@@ -101,7 +101,7 @@ const Post: React.FC<Props> = ({
           </span>
         </div>
       )}
-      <div className={bgUrl != "empty" ? "flex w-full p-2" : "flex w-full"}>
+      <div className={bgUrl !== "empty" ? "flex w-full p-2" : "flex w-full"}>
         <div className="mt-1 w-10 lg:w-12">
           <img
             src={userUrl}

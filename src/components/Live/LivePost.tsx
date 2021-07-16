@@ -2,12 +2,12 @@ import { authenticationData } from "../../Hooks/useAuth";
 import { Redirect, useParams } from "react-router-dom";
 import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
-import React, { FormEvent, useEffect } from "react";
-import ReactMarkdown from "react-markdown";
 import { useState } from "react";
 import { LiveChat } from "./LiveChat";
 import { Form } from "./Form";
-import { render } from "@testing-library/react";
+import { Comment } from "../../interfaces";
+import { FormEvent, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
 import moment from "moment";
 
 interface Props {
@@ -17,11 +17,6 @@ interface Props {
 interface Params {
   userId: string;
   username: string;
-}
-
-interface Comment {
-  user: string;
-  comment: string;
 }
 
 export const LivePost: React.FC<Props> = ({ authData, socket }) => {

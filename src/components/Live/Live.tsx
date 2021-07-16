@@ -4,15 +4,11 @@ import { useEffect, useState } from "react";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import { Link } from "react-router-dom";
 import { useAnimation } from "../../Hooks/useAnimation";
+import { RoomData } from "../../interfaces";
 
 interface Props {
   authData: authenticationData;
   socket: Socket<DefaultEventsMap, DefaultEventsMap> | undefined;
-}
-
-interface RoomData {
-  userId: string;
-  username: string;
 }
 
 export const Live: React.FC<Props> = ({ authData, socket }) => {

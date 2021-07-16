@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import Loading from "../Spinners/Loading";
 import { useAnimation } from "../../Hooks/useAnimation";
+import { PostWithBg, LocationState } from "../../interfaces";
 
 interface Props {
   jwt: string;
@@ -11,21 +12,6 @@ interface Props {
 
 interface Params {
   id: string;
-}
-
-interface PostWithBg {
-  id: number;
-  title: string;
-  content: string;
-  user: string;
-  bgUrl: string;
-  createdAt: string;
-  likes: number;
-}
-
-interface LocationState {
-  userUrl: string;
-  minRead: number;
 }
 
 export const PostById: React.FC<Props> = ({ jwt, userId }) => {

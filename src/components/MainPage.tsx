@@ -1,19 +1,11 @@
 import { useEffect, useState } from "react";
 import { useAnimation } from "../Hooks/useAnimation";
+import { PostWithBg } from "../interfaces";
 import Post from "./Posts/Post";
 import Loading from "./Spinners/Loading";
 
-interface PostWithoutBg {
-  id: number;
-  title: string;
-  content: string;
-  user: string;
-  createdAt: string;
-  likes: number;
-}
-
 export const MainPage: React.FC = () => {
-  const [posts, setPosts] = useState<PostWithoutBg[]>([]);
+  const [posts, setPosts] = useState<PostWithBg[]>([]);
   const { props, a } = useAnimation();
   useEffect(() => {
     document.title = "Brave Blog";
@@ -24,25 +16,45 @@ export const MainPage: React.FC = () => {
       setPosts(await resp.json());
     };
     fetchData();
-    return () => {};
   }, []);
   return (
     <div>
       {posts.length === 0 ? (
         <Loading />
       ) : (
-        <a.div style={props} className="flex flex-col  items-center mb-2">
-          {posts.map((post) => {
+        <a.div
+          style={props}
+          className="flex flex-col  items-center mb-2 right-0"
+        >
+          <div className="mt-2 font-extrabold md:text-lg  lg:w-1/2 w-3/4">
+            Posts
+          </div>
+          <Post
+            key={posts[0].id}
+            username={posts[0].user}
+            title={posts[0].title}
+            likes={posts[0].likes}
+            createdAt={posts[0].createdAt}
+            postId={posts[0].id}
+            content={posts[0].content}
+            bgUrl={posts[0].bgUrl}
+          />
+          {posts.map((post, i) => {
             return (
-              <Post
-                key={post.id}
-                username={post.user}
-                title={post.title}
-                likes={post.likes}
-                createdAt={post.createdAt}
-                postId={post.id}
-                content={post.content}
-              />
+              <div className="w-full flex justify-center">
+                {posts[i + 1] !== undefined && (
+                  <Post
+                    key={posts[i + 1].id}
+                    username={posts[i + 1].user}
+                    title={posts[i + 1].title}
+                    likes={posts[i + 1].likes}
+                    createdAt={posts[i + 1].createdAt}
+                    postId={posts[i + 1].id}
+                    content={posts[i + 1].content}
+                    bgUrl="empty"
+                  />
+                )}
+              </div>
             );
           })}
         </a.div>

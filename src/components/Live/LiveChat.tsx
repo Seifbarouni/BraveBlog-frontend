@@ -1,9 +1,6 @@
 import { useEffect, useRef } from "react";
+import { Comment } from "../../interfaces";
 
-interface Comment {
-  user: string;
-  comment: string;
-}
 interface Props {
   allComments: Comment[];
 }

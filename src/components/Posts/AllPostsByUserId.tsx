@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAnimation } from "../../Hooks/useAnimation";
+import { PostWithBg } from "../../interfaces";
 import Loading from "../Spinners/Loading";
 import Post from "./Post";
 
@@ -8,17 +9,8 @@ interface Props {
   jwt: string;
 }
 
-interface PostWithoutBg {
-  id: number;
-  title: string;
-  content: string;
-  user: string;
-  createdAt: string;
-  likes: number;
-}
-
 export const AllPostsByUserId: React.FC<Props> = ({ user, jwt }) => {
-  const [userPosts, setUserPosts] = useState<PostWithoutBg[]>([]);
+  const [userPosts, setUserPosts] = useState<PostWithBg[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const { props, a } = useAnimation();
   useEffect(() => {
@@ -56,6 +48,7 @@ export const AllPostsByUserId: React.FC<Props> = ({ user, jwt }) => {
                 authenticatedUser={user}
                 setAllPosts={setUserPosts}
                 jwt={jwt}
+                bgUrl="empty"
               />
             );
           })}

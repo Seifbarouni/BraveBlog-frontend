@@ -20,15 +20,19 @@ export const MainPage: React.FC = () => {
     return array;
   };
   const feed = () => {
-    setFocusedTab("Feed");
-    setPosts(shuffleArray(posts));
+    if (focusedTab !== "Feed") {
+      setFocusedTab("Feed");
+      setPosts(shuffleArray(posts));
+    }
   };
   const mostLiked = () => {
-    setFocusedTab("mostLiked");
-    posts.sort((el1, el2) => {
-      return el2.likes - el1.likes;
-    });
-    setPosts(posts);
+    if (focusedTab !== "mostLiked") {
+      setFocusedTab("mostLiked");
+      posts.sort((el1, el2) => {
+        return el2.likes - el1.likes;
+      });
+      setPosts(posts);
+    }
   };
   useEffect(() => {
     document.title = "Brave Blog";

@@ -6,7 +6,30 @@ import Loading from "./Spinners/Loading";
 
 export const MainPage: React.FC = () => {
   const [posts, setPosts] = useState<PostWithBg[]>([]);
+  const [focusedTab, setFocusedTab] = useState<string>("Feed");
   const { props, a } = useAnimation();
+  const shuffleArray = (array: PostWithBg[]) => {
+    let curId = array.length;
+    while (0 !== curId) {
+      let randId = Math.floor(Math.random() * curId);
+      curId -= 1;
+      let tmp = array[curId];
+      array[curId] = array[randId];
+      array[randId] = tmp;
+    }
+    return array;
+  };
+  const feed = () => {
+    setFocusedTab("Feed");
+    setPosts(shuffleArray(posts));
+  };
+  const mostLiked = () => {
+    setFocusedTab("mostLiked");
+    posts.sort((el1, el2) => {
+      return el2.likes - el1.likes;
+    });
+    setPosts(posts);
+  };
   useEffect(() => {
     document.title = "Brave Blog";
     const fetchData = async () => {
@@ -26,8 +49,30 @@ export const MainPage: React.FC = () => {
           style={props}
           className="flex flex-col  items-center mb-2 right-0"
         >
-          <div className="mt-2 font-extrabold md:text-lg  lg:w-1/2 w-3/4">
-            Posts
+          <div className="mt-2 font-extrabold md:text-lg  lg:w-1/2 w-3/4 flex justify-between">
+            <span>Posts</span>
+            <div>
+              <span
+                onClick={feed}
+                className={
+                  focusedTab === "Feed"
+                    ? "mr-2 border-b-2 border-black cursor-pointer hover:bg-gray-300 p-1 rounded-t-md"
+                    : "mr-2 cursor-pointer hover:bg-gray-300 p-1 rounded-t-md"
+                }
+              >
+                Feed
+              </span>
+              <span
+                onClick={mostLiked}
+                className={
+                  focusedTab !== "Feed"
+                    ? "border-b-2 border-black cursor-pointer hover:bg-gray-300 p-1 rounded-t-md"
+                    : " cursor-pointer hover:bg-gray-300 p-1 rounded-t-md"
+                }
+              >
+                Most liked
+              </span>
+            </div>
           </div>
           <Post
             key={posts[0].id}

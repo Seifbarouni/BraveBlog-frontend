@@ -21,12 +21,14 @@ export const MainPage: React.FC = () => {
   };
   const feed = () => {
     if (focusedTab !== "Feed") {
+      document.title = "Brave Blog | Feed";
       setFocusedTab("Feed");
       setPosts(shuffleArray(posts));
     }
   };
   const mostLiked = () => {
     if (focusedTab !== "mostLiked") {
+      document.title = "Brave Blog | mostLiked";
       setFocusedTab("mostLiked");
       posts.sort((el1, el2) => {
         return el2.likes - el1.likes;
@@ -35,7 +37,7 @@ export const MainPage: React.FC = () => {
     }
   };
   useEffect(() => {
-    document.title = "Brave Blog";
+    document.title = "Brave Blog | Feed";
     const fetchData = async () => {
       const resp = await fetch(
         "https://brave-blog-api.herokuapp.com/api/v1/posts"

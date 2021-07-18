@@ -77,7 +77,7 @@ const Post: React.FC<Props> = ({
       }}
       className={
         bgUrl !== "empty"
-          ? "flex flex-col  bg-white rounded-md shadow-md mt-2 cursor-pointer  border  hover:border-gray-700 border-white lg:w-1/2 w-3/4 relative"
+          ? "flex flex-col  bg-white rounded-md shadow-md mt-2 cursor-pointer  border border-transparent hover:border-gray-700 lg:w-1/2 w-3/4 relative"
           : "flex flex-col  bg-white p-2 rounded-md shadow-md mt-2 cursor-pointer  border border-white hover:border-gray-700 lg:w-1/2 w-3/4 relative"
       }
     >

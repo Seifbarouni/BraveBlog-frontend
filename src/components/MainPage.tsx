@@ -42,7 +42,11 @@ export const MainPage: React.FC = () => {
       const resp = await fetch(
         "https://brave-blog-api.herokuapp.com/api/v1/posts"
       );
-      setPosts(await resp.json());
+      const p = await resp.json();
+      p.forEach((pos: PostWithBg) => {
+        if (pos.saves === null) pos.saves = 0;
+      });
+      setPosts(p);
     };
     fetchData();
   }, []);
@@ -85,6 +89,7 @@ export const MainPage: React.FC = () => {
             username={posts[0].user}
             title={posts[0].title}
             likes={posts[0].likes}
+            saves={posts[0].saves}
             createdAt={posts[0].createdAt}
             postId={posts[0].id}
             content={posts[0].content}
@@ -99,6 +104,7 @@ export const MainPage: React.FC = () => {
                     username={posts[i + 1].user}
                     title={posts[i + 1].title}
                     likes={posts[i + 1].likes}
+                    saves={posts[i + 1].saves}
                     createdAt={posts[i + 1].createdAt}
                     postId={posts[i + 1].id}
                     content={posts[i + 1].content}

@@ -48,7 +48,7 @@ export const LoginPopup: React.FC<Props> = ({
       <div className="absolute bg-black opacity-60 inset-0 z-0"></div>
       <a.div
         style={props}
-        className="w-full  max-w-lg p-5 relative mx-auto my-auto rounded-md shadow-lg  bg-white "
+        className="w-full  max-w-lg p-5 relative  sm:rounded-md shadow-lg  bg-white sm:h-auto h-full"
         ref={loginRef}
       >
         <span className="absolute right-0 top-0 p-2 cursor-pointer">

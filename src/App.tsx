@@ -10,6 +10,7 @@ import { LivePost } from "./components/Live/LivePost";
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
+import { SavedPostsByUserId } from "./components/Posts/SavedPostsByUserId";
 
 export default function App() {
   const [socket, setSocket] =
@@ -67,6 +68,13 @@ export default function App() {
                 </Link>
               </div>
             )}
+          </Route>
+          <Route path="/saved">
+            <SavedPostsByUserId
+              user={authData.username}
+              jwt={authData.jwt}
+              userId={authData.userId}
+            />
           </Route>
           <Route path="/live">
             <Live authData={authData} socket={socket} />

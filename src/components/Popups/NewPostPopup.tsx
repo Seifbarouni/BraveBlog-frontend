@@ -38,6 +38,7 @@ export const NewPostPopup: React.FC<Props> = ({
           bgUrl: imageUrl,
           createdAt: moment().format("ll"),
           likes: 0,
+          saves: 0,
         }),
       }
     );
@@ -60,8 +61,8 @@ export const NewPostPopup: React.FC<Props> = ({
         style={props}
         className={
           content === ""
-            ? "lg:w-1/2 sm:2/3 w-full p-5 relative mx-auto my-auto rounded-md shadow-lg  bg-white overflow-y-auto mt-1 mb-1 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100"
-            : "lg:w-1/2 sm:2/3 w-full p-5 relative mx-auto my-auto rounded-md shadow-lg  bg-white h-full overflow-y-auto mt-1 mb-1 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100"
+            ? "lg:w-1/2 sm:2/3 w-full p-5 relative mx-auto my-auto sm:rounded-md shadow-lg  bg-white overflow-y-auto mt-1 mb-1 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100"
+            : "lg:w-1/2 sm:2/3 w-full p-5 relative mx-auto my-auto sm:rounded-md shadow-lg  bg-white h-full overflow-y-auto mt-1 mb-1 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100"
         }
         ref={newPostRef}
       >

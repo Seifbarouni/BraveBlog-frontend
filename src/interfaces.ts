@@ -6,6 +6,7 @@ export interface PostWithBg {
   bgUrl: string;
   createdAt: string;
   likes: number;
+  saves: number;
 }
 
 export interface LocationState {

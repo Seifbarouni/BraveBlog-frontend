@@ -6,6 +6,7 @@ interface Props {
   title: string;
   content: string;
   likes: number;
+  saves: number;
   createdAt: string;
   postId: number;
   authenticatedUser?: string;
@@ -18,6 +19,7 @@ const Post: React.FC<Props> = ({
   username,
   title,
   likes,
+  saves,
   createdAt,
   postId,
   content,
@@ -62,7 +64,8 @@ const Post: React.FC<Props> = ({
       setUserUrl(data);
     };
     const calculateMinRead = () => {
-      const mR = Math.round(content.split(" ").length / wpm);
+      const mR =
+        content !== undefined ? Math.round(content.split(" ").length / wpm) : 0;
       if (mR === 0) return 1;
       return mR;
     };
@@ -117,12 +120,20 @@ const Post: React.FC<Props> = ({
           <div className="font-bold mt-2 lg:text-lg">{title}</div>
 
           <div className="mt-2 flex justify-between items-center text-gray-600 lg:text-base text-sm w-full">
-            <span className="flex items-center">
-              <img src="/images/like.svg" alt="" className="h-4 w-4" />{" "}
-              <span className="ml-1">
-                {likes} like{likes !== 1 ? "s" : ""}
+            <div className="flex items-center">
+              <span className="flex items-center">
+                <img src="/images/like.svg" alt="" className="h-4 w-4" />{" "}
+                <span className="ml-1">
+                  {likes} like{likes !== 1 ? "s" : ""}
+                </span>
               </span>
-            </span>
+              <span className="flex items-center ml-3">
+                <img src="/images/saved.svg" alt="" className="h-4 w-4" />{" "}
+                <span className="ml-1">
+                  {saves} save{saves !== 1 ? "s" : ""}
+                </span>
+              </span>
+            </div>
             <span>{minRead} min read</span>
           </div>
         </div>

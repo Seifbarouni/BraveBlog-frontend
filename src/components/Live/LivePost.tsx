@@ -1,5 +1,5 @@
 import { authenticationData } from "../../Hooks/useAuth";
-import { Redirect, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import { useState } from "react";
@@ -66,6 +66,7 @@ export const LivePost: React.FC<Props> = ({ authData, socket }) => {
           bgUrl: imageUrl,
           createdAt: moment().format("ll"),
           likes: 0,
+          saves: 0,
         }),
       }
     );

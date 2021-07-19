@@ -17,12 +17,17 @@ interface Params {
 export const PostById: React.FC<Props> = ({ jwt, userId }) => {
   const { id } = useParams<Params>();
   const [like, setLike] = useState<string>("not liked");
+  const [saved, setSaved] = useState<string>("not saved");
   const [likesNumber, setLikesNumber] = useState<number>(0);
+  const [savesNumber, setSavesNumber] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(true);
   const { props, a } = useAnimation();
   const { userUrl, minRead } = useLocation<LocationState>().state;
   const updateLike = () => {
     like === "liked" ? setLike("not liked") : setLike("liked");
+  };
+  const updateSave = () => {
+    saved === "saved" ? setSaved("not saved") : setSaved("saved");
   };
   const [post, setPost] = useState<PostWithBg>({
     id: 0,
@@ -32,7 +37,32 @@ export const PostById: React.FC<Props> = ({ jwt, userId }) => {
     bgUrl: "",
     createdAt: "",
     likes: 0,
+    saves: 0,
   });
+  const checkIfPostLiked = async () => {
+    const resp = await fetch(
+      `https://brave-blog-api.herokuapp.com/l/didLike/${id}/${userId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
+    );
+    setLike(await resp.text());
+  };
+  const checkIfPostSaved = async () => {
+    const resp = await fetch(
+      `https://brave-blog-api.herokuapp.com/s/didSave/${id}/${userId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
+    );
+    setSaved(await resp.text());
+  };
   useEffect(() => {
     const fetchPostData = async () => {
       document.title = "Brave Blog | Post " + id;
@@ -48,29 +78,16 @@ export const PostById: React.FC<Props> = ({ jwt, userId }) => {
       const temppost = await resp.json();
       setPost(temppost);
       setLikesNumber(temppost.likes);
-    };
-
-    const checkIfPostLiked = async () => {
-      const resp = await fetch(
-        `https://brave-blog-api.herokuapp.com/l/didLike/${id}/${userId}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${jwt}`,
-          },
-        }
-      );
-      setLike(await resp.text());
+      setSavesNumber(temppost.saves !== null ? temppost.saves : 0);
     };
 
     fetchPostData();
     checkIfPostLiked();
+    checkIfPostSaved();
     setLoading(false);
-    return () => {};
   }, [id, jwt, userId]);
   const dislikePost = async () => {
     setLikesNumber(likesNumber - 1);
-    setLike("not liked");
     const resp = await fetch(
       `https://brave-blog-api.herokuapp.com/l/dislike/${id}/${userId}`,
       {
@@ -85,9 +102,36 @@ export const PostById: React.FC<Props> = ({ jwt, userId }) => {
   };
   const likePost = async () => {
     setLikesNumber(likesNumber + 1);
-    setLike("liked");
     const resp = await fetch(
       `https://brave-blog-api.herokuapp.com/l/like/${id}/${userId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
+    );
+    const message = await resp.text();
+    if (message !== "Success") alert(message);
+  };
+  const savePost = async () => {
+    setSavesNumber(savesNumber + 1);
+    const resp = await fetch(
+      `https://brave-blog-api.herokuapp.com/s/save/${id}/${userId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
+    );
+    const message = await resp.text();
+    if (message !== "Success") alert(message);
+  };
+  const unsavePost = async () => {
+    setSavesNumber(savesNumber - 1);
+    const resp = await fetch(
+      `https://brave-blog-api.herokuapp.com/s/unsave/${id}/${userId}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -102,8 +146,12 @@ export const PostById: React.FC<Props> = ({ jwt, userId }) => {
     <div className="flex  justify-center lg:w-1/2">
       {!loading ? (
         <a.div style={props} className="flex  justify-center  self-center mb-2">
-          <div className="mt-8  md:flex hidden w-1/12 justify-center">
-            <div className="flex flex-col items-center" onClick={updateLike}>
+          <div className="mt-8  md:flex flex-col hidden w-1/12 justify-start h-full sticky  top-20">
+            <div
+              className="flex flex-col items-center"
+              onClick={updateLike}
+              title={like === "liked" ? "dislike" : "like"}
+            >
               <img
                 src={
                   like === "liked"
@@ -115,6 +163,21 @@ export const PostById: React.FC<Props> = ({ jwt, userId }) => {
                 className="cursor-pointer h-6 w-6"
               />{" "}
               <span className="font-bold mt-2">{likesNumber}</span>
+            </div>
+            <div
+              className="flex flex-col items-center mt-6"
+              onClick={updateSave}
+              title={saved === "saved" ? "unsave" : "save"}
+            >
+              <img
+                src={
+                  saved === "saved" ? "/images/saved.svg" : "/images/save.svg"
+                }
+                alt="archive"
+                onClick={saved === "saved" ? unsavePost : savePost}
+                className="cursor-pointer h-6 w-6"
+              />{" "}
+              <span className="font-bold mt-2">{savesNumber}</span>
             </div>
           </div>
 
@@ -134,6 +197,7 @@ export const PostById: React.FC<Props> = ({ jwt, userId }) => {
                 <span
                   className="flex items-center font-bold"
                   onClick={updateLike}
+                  title={like === "liked" ? "dislike" : "like"}
                 >
                   <img
                     src={
@@ -147,7 +211,26 @@ export const PostById: React.FC<Props> = ({ jwt, userId }) => {
                   />{" "}
                   <span className="ml-1">{likesNumber}</span>
                 </span>
+
+                <div
+                  className="flex items-center ml-4 font-bold"
+                  onClick={updateSave}
+                  title={saved === "saved" ? "unsave" : "save"}
+                >
+                  <img
+                    src={
+                      saved === "saved"
+                        ? "/images/saved.svg"
+                        : "/images/save.svg"
+                    }
+                    alt="archive"
+                    onClick={saved === "saved" ? unsavePost : savePost}
+                    className="cursor-pointer h-6 w-6"
+                  />{" "}
+                  <span className="ml-1">{savesNumber}</span>
+                </div>
               </div>
+
               <div className="flex items-center justify-between mt-4">
                 <span className="flex items-center">
                   <div className="">

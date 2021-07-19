@@ -141,6 +141,12 @@ export const Navbar: React.FC<any> = ({ authData, setAuthData }) => {
           >
             New post
           </div>
+          <Link
+            to="/saved"
+            className="cursor-pointer mr-2 hover:text-gray-700 sm:flex hidden"
+          >
+            Saved
+          </Link>
           {isAddPostModalOpen ? (
             <NewPostPopup
               setAddPostModal={setAddPostModal}
@@ -175,27 +181,33 @@ export const Navbar: React.FC<any> = ({ authData, setAuthData }) => {
             <div className="flex flex-col sm:hidden ml-14 font-bold">
               <Link
                 to="/live"
-                className="mr-4 cursor-pointer hover:text-gray-700"
+                className="mr-4 cursor-pointer hover:text-gray-700 border-b border-gray-400 w-full"
               >
                 Live
               </Link>
               <Link
                 to="/myPosts"
-                className="cursor-pointer mr-2 hover:text-gray-700"
+                className="cursor-pointer mr-2 hover:text-gray-700 border-b border-gray-400 w-full"
               >
                 My posts
               </Link>
               <div
-                className="cursor-pointer mr-2 hover:text-gray-700"
+                className="cursor-pointer mr-2 hover:text-gray-700 border-b border-gray-400 w-full"
                 onClick={OpenAddPostModal}
               >
                 New post
               </div>
               <Link
                 to="/profile"
-                className="cursor-pointer mr-2 hover:text-gray-700"
+                className="cursor-pointer mr-2 hover:text-gray-700 border-b border-gray-400 w-full"
               >
                 Profile
+              </Link>
+              <Link
+                to="/saved"
+                className="cursor-pointer mr-2 hover:text-gray-700 border-b border-gray-400 w-full"
+              >
+                Saved
               </Link>
               <div
                 className="cursor-pointer mr-2 hover:text-gray-700"

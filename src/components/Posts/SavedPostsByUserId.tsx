@@ -7,17 +7,18 @@ import Post from "./Post";
 interface Props {
   user: string;
   jwt: string;
+  userId: number;
 }
 
-export const AllPostsByUserId: React.FC<Props> = ({ user, jwt }) => {
-  const [userPosts, setUserPosts] = useState<PostWithBg[]>([]);
+export const SavedPostsByUserId: React.FC<Props> = ({ user, jwt, userId }) => {
+  const [savedPosts, setSavedPosts] = useState<PostWithBg[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const { props, a } = useAnimation();
   useEffect(() => {
-    document.title = "Brave Blog | My posts";
+    document.title = "Brave Blog | My saved posts";
     const fetchData = async () => {
       const resp = await fetch(
-        `https://brave-blog-api.herokuapp.com/api/v1/posts/us/${user}`,
+        `https://brave-blog-api.herokuapp.com/s/getSavedPosts/${userId}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -29,20 +30,20 @@ export const AllPostsByUserId: React.FC<Props> = ({ user, jwt }) => {
       p.forEach((pos: PostWithBg) => {
         if (pos.saves === null) pos.saves = 0;
       });
-      setUserPosts(p);
+      setSavedPosts(p);
     };
 
     fetchData();
     setLoading(false);
-  }, [user, jwt]);
+  }, [userId, jwt]);
   return (
     <div>
-      {userPosts.length !== 0 ? (
+      {savedPosts.length !== 0 ? (
         <a.div style={props} className="flex flex-col  items-center mb-2">
           <span className="mt-2 font-extrabold md:text-lg  lg:w-1/2 w-3/4">
-            My posts
+            My archive
           </span>
-          {userPosts.map((post) => {
+          {savedPosts.map((post) => {
             return (
               <Post
                 key={post.id}
@@ -54,7 +55,7 @@ export const AllPostsByUserId: React.FC<Props> = ({ user, jwt }) => {
                 postId={post.id}
                 content={post.content}
                 authenticatedUser={user}
-                setAllPosts={setUserPosts}
+                setAllPosts={setSavedPosts}
                 jwt={jwt}
                 bgUrl="empty"
               />
@@ -65,7 +66,7 @@ export const AllPostsByUserId: React.FC<Props> = ({ user, jwt }) => {
         <div>
           {loading ? (
             <div className="text-center mt-12 text-xl font-bold">
-              You have no posts!
+              You have no saved posts!
             </div>
           ) : (
             <Loading />

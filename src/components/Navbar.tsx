@@ -187,7 +187,7 @@ export const Navbar: React.FC<any> = ({ authData, setAuthData }) => {
               </Link>
               <Link
                 to="/myPosts"
-                className="cursor-pointer mr-2 hover:text-gray-700 border-b border-gray-400 w-full"
+                className="cursor-pointer mr-2 hover:text-gray-700 border-b border-gray-400 w-full "
               >
                 My posts
               </Link>

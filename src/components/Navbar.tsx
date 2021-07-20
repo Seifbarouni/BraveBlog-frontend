@@ -101,18 +101,18 @@ export const Navbar: React.FC<any> = ({ authData, setAuthData }) => {
             <div className="flex flex-col sm:hidden ml-14 font-bold">
               <Link
                 to="/live"
-                className="mr-4 cursor-pointer hover:text-gray-700"
+                className="mr-4 cursor-pointer hover:text-gray-700 border-b border-gray-400 w-full"
               >
                 Live
               </Link>
               <span
-                className="cursor-pointer mr-4 hover:text-gray-700"
+                className="mr-4 cursor-pointer hover:text-gray-700 border-b border-gray-400 w-full"
                 onClick={OpenLoginModal}
               >
                 Log in
               </span>
               <span
-                className="cursor-pointer mr-4 hover:text-gray-700"
+                className="mr-4 cursor-pointer hover:text-gray-700 w-full"
                 onClick={OpenRegisterModal}
               >
                 Register

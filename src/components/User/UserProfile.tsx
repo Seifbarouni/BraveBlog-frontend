@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useAnimation } from "../../Hooks/useAnimation";
-import { authenticationData } from "../../Hooks/useAuth";
+import { useAnimation } from "../../hooks/useAnimation";
+import { authenticationData } from "../../hooks/useAuth";
 
 interface Props {
   authData: authenticationData;

@@ -1,11 +1,11 @@
-import { authenticationData } from "../../Hooks/useAuth";
+import { authenticationData } from "../../hooks/useAuth";
 import { useParams } from "react-router-dom";
 import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import { useState } from "react";
 import { LiveChat } from "./LiveChat";
 import { Form } from "./Form";
-import { Comment } from "../../interfaces";
+import { Comment } from "../../interfaces/interfaces";
 import { FormEvent, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import moment from "moment";
@@ -100,6 +100,7 @@ export const LivePost: React.FC<Props> = ({ authData, socket }) => {
         socket?.emit("cleanRoom", `room/${userId}/${username}`);
       else socket?.emit("leave", `room/${userId}/${username}`);
     };
+    // eslint-disable-next-line
   }, []);
   useEffect(() => {
     if (!socket) return;
@@ -128,6 +129,7 @@ export const LivePost: React.FC<Props> = ({ authData, socket }) => {
         }, 1000);
       }
     });
+    // eslint-disable-next-line
   }, [socket]);
   return (
     <div className="flex flex-col items-center justify-center w-full">

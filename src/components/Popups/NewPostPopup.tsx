@@ -1,8 +1,8 @@
 import { useState } from "react";
 import moment from "moment";
 import ReactMarkdown from "react-markdown";
-import { authenticationData } from "../../Hooks/useAuth";
-import { useAnimation } from "../../Hooks/useAnimation";
+import { authenticationData } from "../../hooks/useAuth";
+import { useAnimation } from "../../hooks/useAnimation";
 
 interface Props {
   setAddPostModal: React.Dispatch<React.SetStateAction<boolean>>;

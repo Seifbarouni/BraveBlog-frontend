@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Comment } from "../../interfaces";
+import { Comment } from "../../interfaces/interfaces";
 
 interface Props {
   allComments: Comment[];

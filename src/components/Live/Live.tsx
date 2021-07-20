@@ -1,10 +1,10 @@
-import { authenticationData } from "../../Hooks/useAuth";
+import { authenticationData } from "../../hooks/useAuth";
 import { Socket } from "socket.io-client";
 import { useEffect, useState } from "react";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import { Link } from "react-router-dom";
-import { useAnimation } from "../../Hooks/useAnimation";
-import { RoomData } from "../../interfaces";
+import { useAnimation } from "../../hooks/useAnimation";
+import { RoomData } from "../../interfaces/interfaces";
 
 interface Props {
   authData: authenticationData;
@@ -12,6 +12,7 @@ interface Props {
 }
 
 export const Live: React.FC<Props> = ({ authData, socket }) => {
+  // eslint-disable-next-line
   const [rooms, setRooms] = useState<string[]>([]);
   const [roomsData, setRoomsData] = useState<RoomData[]>([]);
   const { props, a } = useAnimation();

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useAnimation } from "../Hooks/useAnimation";
+import { useAnimation } from "../hooks/useAnimation";
 
 export const DropDown: React.FC<any> = ({ dropdownRef, logout }) => {
   const { props, a } = useAnimation();

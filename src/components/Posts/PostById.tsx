@@ -2,8 +2,8 @@ import { useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import Loading from "../Spinners/Loading";
-import { useAnimation } from "../../Hooks/useAnimation";
-import { PostWithBg, LocationState } from "../../interfaces";
+import { useAnimation } from "../../hooks/useAnimation";
+import { PostWithBg, LocationState } from "../../interfaces/interfaces";
 
 interface Props {
   jwt: string;
@@ -85,6 +85,7 @@ export const PostById: React.FC<Props> = ({ jwt, userId }) => {
     checkIfPostLiked();
     checkIfPostSaved();
     setLoading(false);
+    // eslint-disable-next-line
   }, [id, jwt, userId]);
   const dislikePost = async () => {
     setLikesNumber(likesNumber - 1);

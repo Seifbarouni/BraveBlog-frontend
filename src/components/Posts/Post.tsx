@@ -71,7 +71,7 @@ const Post: React.FC<Props> = ({
     };
     getImage(username);
     setMinRead(calculateMinRead());
-  }, [username]);
+  }, [username, content]);
   return (
     <Link
       to={{

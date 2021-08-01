@@ -1,9 +1,9 @@
-import { authenticationData } from "../../hooks/useAuth";
+import { authenticationData } from "../../Hooks/useAuth";
 import { Socket } from "socket.io-client";
 import { useEffect, useState } from "react";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import { Link } from "react-router-dom";
-import { useAnimation } from "../../hooks/useAnimation";
+import { useAnimation } from "../../Hooks/useAnimation";
 import { RoomData } from "../../interfaces/interfaces";
 
 interface Props {

@@ -1,4 +1,4 @@
-import { authenticationData } from "../../hooks/useAuth";
+import { authenticationData } from "../../Hooks/useAuth";
 import { useParams } from "react-router-dom";
 import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";

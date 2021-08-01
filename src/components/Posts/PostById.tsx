@@ -2,7 +2,7 @@ import { useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import Loading from "../Spinners/Loading";
-import { useAnimation } from "../../hooks/useAnimation";
+import { useAnimation } from "../../Hooks/useAnimation";
 import { PostWithBg, LocationState } from "../../interfaces/interfaces";
 
 interface Props {

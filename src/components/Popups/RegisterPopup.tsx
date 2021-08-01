@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAnimation } from "../../hooks/useAnimation";
+import { useAnimation } from "../../Hooks/useAnimation";
 
 interface Props {
   setRegisterModal: React.Dispatch<React.SetStateAction<boolean>>;

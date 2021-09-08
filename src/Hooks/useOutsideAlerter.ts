@@ -16,6 +16,7 @@ export const useOutsideAlerter = (initialValue: boolean) => {
     document.addEventListener("keydown", handleKeyPress, true);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyPress);
     };
   }, [ref]);
 

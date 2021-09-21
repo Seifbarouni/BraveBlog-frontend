@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAnimation } from "../Hooks/useAnimation";
+
 import { PostWithBg } from "../interfaces/interfaces";
 import Post from "./Posts/Post";
 import Loading from "./Spinners/Loading";

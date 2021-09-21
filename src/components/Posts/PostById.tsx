@@ -1,10 +1,10 @@
 import { useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
+
 import Loading from "../Spinners/Loading";
 import { useAnimation } from "../../Hooks/useAnimation";
 import { PostWithBg, LocationState } from "../../interfaces/interfaces";
-
 interface Props {
   jwt: string;
   userId: number;

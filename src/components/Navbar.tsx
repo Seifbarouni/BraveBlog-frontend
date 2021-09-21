@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+
 import { DropDown } from "./DropDown";
 import { LoginPopup } from "./Popups/LoginPopup";
 import { NewPostPopup } from "./Popups/NewPostPopup";
 import { RegisterPopup } from "./Popups/RegisterPopup";
 import { useOutsideAlerter } from "../Hooks/useOutsideAlerter";
-import { useState } from "react";
 
 export const Navbar: React.FC<any> = ({ authData, setAuthData }) => {
   const OpenLoginModal = () => {

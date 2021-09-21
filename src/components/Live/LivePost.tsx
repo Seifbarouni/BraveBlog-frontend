@@ -1,15 +1,14 @@
-import { authenticationData } from "../../Hooks/useAuth";
+import { FormEvent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
 import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "socket.io-client/build/typed-events";
-import { useState } from "react";
+import moment from "moment";
+
+import { authenticationData } from "../../Hooks/useAuth";
 import { LiveChat } from "./LiveChat";
 import { Form } from "./Form";
 import { Comment } from "../../interfaces/interfaces";
-import { FormEvent, useEffect } from "react";
-import ReactMarkdown from "react-markdown";
-import moment from "moment";
-
 interface Props {
   authData: authenticationData;
   socket: Socket<DefaultEventsMap, DefaultEventsMap> | undefined;

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useAnimation } from "../../Hooks/useAnimation";
 import { PostWithBg } from "../../interfaces/interfaces";
+
 import Loading from "../Spinners/Loading";
 import Post from "./Post";
-
 interface Props {
   user: string;
   jwt: string;

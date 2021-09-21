@@ -1,15 +1,16 @@
 import { BrowserRouter, Route, Switch, Link, Redirect } from "react-router-dom";
-import { MainPage } from "./components/MainPage";
-import { PostById } from "./components/Posts/PostById";
-import { Navbar } from "./components/Navbar";
 import useAuth from "./Hooks/useAuth";
+import { useEffect, useState } from "react";
+import { io, Socket } from "socket.io-client";
+import { DefaultEventsMap } from "socket.io-client/build/typed-events";
+
 import { AllPostsByUserId } from "./components/Posts/AllPostsByUserId";
 import { UserProfile } from "./components/User/UserProfile";
 import { Live } from "./components/Live/Live";
 import { LivePost } from "./components/Live/LivePost";
-import { useEffect, useState } from "react";
-import { io, Socket } from "socket.io-client";
-import { DefaultEventsMap } from "socket.io-client/build/typed-events";
+import { MainPage } from "./components/MainPage";
+import { PostById } from "./components/Posts/PostById";
+import { Navbar } from "./components/Navbar";
 import { SavedPostsByUserId } from "./components/Posts/SavedPostsByUserId";
 
 export default function App() {

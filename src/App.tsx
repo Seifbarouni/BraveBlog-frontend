@@ -6,6 +6,7 @@ import { DefaultEventsMap } from "socket.io-client/build/typed-events";
 import { Live } from "./components/Live/Live";
 
 import Navbar from "./components/Navbar";
+import Loading2 from "./components/Spinners/Loading2";
 const LivePost = React.lazy(() => import("./components/Live/LivePost"));
 const AllPostsByUserId = React.lazy(
   () => import("./components/Posts/AllPostsByUserId")
@@ -32,7 +33,7 @@ export default function App() {
     <div>
       <BrowserRouter>
         <Navbar setAuthData={saveData} authData={authData} />
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading2 />}>
           <Switch>
             <Route exact path="/">
               <MainPage />

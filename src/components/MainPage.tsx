@@ -5,7 +5,7 @@ import { PostWithBg } from "../interfaces/interfaces";
 import Post from "./Posts/Post";
 import Loading from "./Spinners/Loading";
 
-export const MainPage: React.FC = () => {
+const MainPage: React.FC = () => {
   const [posts, setPosts] = useState<PostWithBg[]>([]);
   const [focusedTab, setFocusedTab] = useState<string>("Feed");
   const { props, a } = useAnimation();
@@ -120,3 +120,5 @@ export const MainPage: React.FC = () => {
     </div>
   );
 };
+
+export default MainPage;

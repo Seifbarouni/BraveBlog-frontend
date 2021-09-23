@@ -7,7 +7,7 @@ interface Props {
   setAuthData: any;
 }
 
-export const UserProfile: React.FC<Props> = ({ authData, setAuthData }) => {
+const UserProfile: React.FC<Props> = ({ authData, setAuthData }) => {
   const [newUsername, setNewUsername] = useState<string>(authData.username);
   const [newEmail, setNewEmail] = useState<string>(authData.email);
   const [newImage, setNewImage] = useState<string>(authData.picUrl);
@@ -153,3 +153,5 @@ export const UserProfile: React.FC<Props> = ({ authData, setAuthData }) => {
     </a.div>
   );
 };
+
+export default UserProfile;

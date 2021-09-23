@@ -10,7 +10,7 @@ interface Props {
   jwt: string;
 }
 
-export const AllPostsByUserId: React.FC<Props> = ({ user, jwt }) => {
+const AllPostsByUserId: React.FC<Props> = ({ user, jwt }) => {
   const [userPosts, setUserPosts] = useState<PostWithBg[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const { props, a } = useAnimation();
@@ -76,3 +76,5 @@ export const AllPostsByUserId: React.FC<Props> = ({ user, jwt }) => {
     </div>
   );
 };
+
+export default AllPostsByUserId;

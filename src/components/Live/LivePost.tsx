@@ -18,7 +18,7 @@ interface Params {
   username: string;
 }
 
-export const LivePost: React.FC<Props> = ({ authData, socket }) => {
+const LivePost: React.FC<Props> = ({ authData, socket }) => {
   const { userId, username } = useParams<Params>();
   const [text, setText] = useState<string>("");
   const [title, setTitle] = useState<string>("");
@@ -229,3 +229,5 @@ export const LivePost: React.FC<Props> = ({ authData, socket }) => {
     </div>
   );
 };
+
+export default LivePost;

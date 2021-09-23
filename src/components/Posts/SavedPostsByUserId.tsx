@@ -10,7 +10,7 @@ interface Props {
   userId: number;
 }
 
-export const SavedPostsByUserId: React.FC<Props> = ({ user, jwt, userId }) => {
+const SavedPostsByUserId: React.FC<Props> = ({ user, jwt, userId }) => {
   const [savedPosts, setSavedPosts] = useState<PostWithBg[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const { props, a } = useAnimation();
@@ -76,3 +76,5 @@ export const SavedPostsByUserId: React.FC<Props> = ({ user, jwt, userId }) => {
     </div>
   );
 };
+
+export default SavedPostsByUserId;

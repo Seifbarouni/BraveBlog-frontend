@@ -14,7 +14,7 @@ interface Params {
   id: string;
 }
 
-export const PostById: React.FC<Props> = ({ jwt, userId }) => {
+const PostById: React.FC<Props> = ({ jwt, userId }) => {
   const { id } = useParams<Params>();
   const [like, setLike] = useState<string>("not liked");
   const [saved, setSaved] = useState<string>("not saved");
@@ -261,3 +261,5 @@ export const PostById: React.FC<Props> = ({ jwt, userId }) => {
     </div>
   );
 };
+
+export default PostById;

@@ -7,7 +7,7 @@ import { NewPostPopup } from "./Popups/NewPostPopup";
 import { RegisterPopup } from "./Popups/RegisterPopup";
 import { useOutsideAlerter } from "../Hooks/useOutsideAlerter";
 
-export const Navbar: React.FC<any> = ({ authData, setAuthData }) => {
+const Navbar: React.FC<any> = ({ authData, setAuthData }) => {
   const OpenLoginModal = () => {
     setLoginModal(true);
   };
@@ -223,3 +223,5 @@ export const Navbar: React.FC<any> = ({ authData, setAuthData }) => {
     </div>
   );
 };
+
+export default Navbar;

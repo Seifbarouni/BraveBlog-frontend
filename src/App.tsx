@@ -22,7 +22,7 @@ export default function App() {
   const [socket, setSocket] =
     useState<Socket<DefaultEventsMap, DefaultEventsMap>>();
   useEffect(() => {
-    setSocket(io("https://brave-blog-live-server.herokuapp.com"));
+    setSocket(io("https://braveblog-live-server-production.up.railway.app/"));
     return () => {
       socket?.disconnect();
     };
